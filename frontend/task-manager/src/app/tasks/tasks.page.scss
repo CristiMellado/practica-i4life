@@ -1,0 +1,28 @@
+ion-toolbar{
+    --background:#ebebec;
+    color: black;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 20px;
+  }
+  
+  ion-content{
+    --background: #6bc0bb;
+  }
+
+  ion-button.add-btn {
+    --background: #947078;
+    color:white;
+    font-weight: bold;
+    font-size:16px;
+    padding: 15px;
+    width: 10%;
+    --border-radius: 15px;
+  
+    &:hover{
+      --background:#7A5E51;
+      color: black;
+      transform: scale(1.05);
+      transition: all 0.3s ease;
+    }
+  }
