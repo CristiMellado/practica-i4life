@@ -1,6 +1,20 @@
+//estilos a toolbar
+
+ion-toolbar{
+  --background:#ebebec;
+  color: black;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 20px;
+}
+
+ion-title{
+  font-size: 25px;
+  margin-top: 15px;
+}
+
 #container {
   text-align: center;
-
   position: absolute;
   left: 0;
   right: 0;
@@ -8,10 +22,42 @@
   transform: translateY(-50%);
 }
 
+//fondo 
+ion-content{
+  --background: #6bc0bb;
+}
+
+//estilos al botón
+ion-button.add-btn {
+  --background: #947078;
+  color:white;
+  font-weight: bold;
+  font-size:16px;
+  padding: 15px;
+  width: 10%;
+  --border-radius: 15px;
+
+  &:hover{
+    --background:#7A5E51;
+    color: black;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+  }
+}
+
+ion-content {
+  --padding-start: 20px;  /* Padding izquierdo */
+  --padding-end: 20px;    /* Padding derecho */
+  --padding-top: 30px;    /* Padding superior */
+  --padding-bottom: 20px; /* Padding inferior */
+}
+
+
 #container strong {
   font-size: 20px;
   line-height: 26px;
 }
+
 
 #container p {
   font-size: 16px;
@@ -25,3 +71,8 @@
 #container a {
   text-decoration: none;
 }
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+  }
