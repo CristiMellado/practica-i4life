@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskService } from '../services/task.service';
+import { TaskService,Task } from '../services/task.service';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.page.html',
@@ -34,9 +34,9 @@ export class TasksPage implements OnInit {
   toggleTask(task: any) {
     this.taskService.toggleTask(task._id).subscribe();
   }
-  deleteTask(id: string) {
-    this.taskService.deleteTask(id).subscribe(() => {
-      this.tasks = this.tasks.filter((t) => t._id !== id);
+  deleteTask(task: Task) { //paso la ruta correcta antes recibia el id, ahora tengo que pasarle el objeto
+    this.taskService.deleteTask(task._id!).subscribe(() => {  //accedo en mi objeto a su atributo id
+      this.tasks = this.tasks.filter((t) => t._id !== task._id);
     });
   }
 }

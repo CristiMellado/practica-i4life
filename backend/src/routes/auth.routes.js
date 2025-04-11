@@ -17,7 +17,7 @@ router.post("/register", async (req, res) => {
 });
 
 // Inicio de sesión
-router.post('/login', async (req, res) => { //agregue api 
+router.post('/login', async (req, res) => { 
     try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });

@@ -14,7 +14,7 @@ export class LoginPage {
   constructor(private authService: AuthService, private router: Router) {}
   login() {
     this.authService.login(this.username, this.password).subscribe(() => {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/tasks']); //Aquí es donde eligido a que ruta me va a cargar la página
     });
   }
 }

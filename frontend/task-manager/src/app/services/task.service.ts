@@ -11,7 +11,7 @@ export interface Task {
   providedIn: 'root',
 })
 export class TaskService {
-  private apiUrl = environment.apiUrl; //+ '/tasks'
+  private apiUrl = environment.apiUrl; 
 
   constructor(private http: HttpClient) {}
 
@@ -24,10 +24,12 @@ export class TaskService {
     return this.http.post<Task>(this.apiUrl, { title},{headers}); //agrege headers 
   }
   toggleTask(id: string): Observable<Task> {
-    return this.http.put<Task>(`${this.apiUrl}/${id}`, {});
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`); //lo añadi
+    return this.http.put<Task>(`${this.apiUrl}/tasks/${id}`, {headers});
   }
   deleteTask(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`); //lo añadi
+    return this.http.delete(`${this.apiUrl}/tasks/${id}`, {headers});
   }
 }
 

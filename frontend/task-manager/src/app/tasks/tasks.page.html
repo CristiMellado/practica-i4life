@@ -12,7 +12,7 @@
         [(ngModel)]="task.completed"
         (ionChange)="toggleTask(task)"
       ></ion-checkbox>
-      <ion-button color="danger" fill="clear" (click)="deleteTask(task.id)">
+      <ion-button color="danger" fill="clear" (click)="deleteTask(task)"> <!--Obtengo unicamente el objeto-->
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>
