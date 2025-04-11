@@ -6,6 +6,7 @@ export interface Task {
   _id?: string;
   title: string;
   completed: boolean;
+  department?: string, //añado el nuevo campo de mi capa modelo
 }
 @Injectable({
   providedIn: 'root',
@@ -15,13 +16,21 @@ export class TaskService {
 
   constructor(private http: HttpClient) {}
 
+  //método para obtener todas las tareas
+  getAllTasks(): Observable <Task[]>{
+    return this.http.get<Task[]>(`${this.apiUrl}/tasks`);
+  }
+
+  //método para obtener las tareas del usuario
   getTasks(): Observable<Task[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     return this.http.get<Task[]>(this.apiUrl, { headers });
     }
-  addTask(title: string): Observable<Task> {
+
+  // Refactorizo para agregar el departamento  
+  addTask(title: string, department: string,): Observable<Task> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    return this.http.post<Task>(this.apiUrl, { title},{headers}); //agrege headers 
+    return this.http.post<Task>(this.apiUrl, { title, department},{headers}); //agrege headers //Deparment
   }
   toggleTask(id: string): Observable<Task> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`); //lo añadi

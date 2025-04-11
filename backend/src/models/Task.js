@@ -5,7 +5,13 @@ const mongoose = require('mongoose');
 const taskSchema = new mongoose.Schema({
 title: { type: String, required: true },
 completed: { type: Boolean, default: false },
-userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true } //probando esto para que funcione
+userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, //probando esto para que funcione
+department: {
+    type: String,
+    enum: ['Datos & IOT', 'Desarrollo Fullstack', 'Marketing', 'Diseño Web'],
+    required: false,
+  }
+
 /*con timestamps, agrga createAt y updateAt a cada documento útil 
 para saber cuando se creó y cuando se modificó*/
 }, { timestamps: true });  

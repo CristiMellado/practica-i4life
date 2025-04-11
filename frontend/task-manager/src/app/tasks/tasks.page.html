@@ -3,6 +3,7 @@
     <ion-title>Mis Tareas</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let task of tasks">
@@ -17,11 +18,26 @@
       </ion-button>
     </ion-item>
   </ion-list>
+
+  <!-- Aquí es donde se añade el formulario para nueva tarea -->
   <ion-item>
     <ion-input [(ngModel)]="newTaskTitle" placeholder="Nueva tarea"></ion-input>
-    <ion-button (click)="addTask()" class="add-btn">Añadir</ion-button>
+    <ion-label>Departamento</ion-label>
+    <ion-select [(ngModel)]="selectedDepartment" placeholder="Selecciona un departamento">
+      <ion-select-option value="Datos & IOT">Datos & IOT</ion-select-option>
+      <ion-select-option value="Desarrollo Fullstack">Desarrollo Fullstack</ion-select-option>
+      <ion-select-option value="Marketing">Marketing</ion-select-option>
+      <ion-select-option value="Diseño Web">Diseño Web</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+  <!-- Botón para añadir la tarea -->
+  <ion-item>
+    <ion-button (click)="addTask()" class="add-btn" expand="full">Añadir Tarea</ion-button>
   </ion-item>
 </ion-content>
+
 
 <!--<ion-header [translucent]="true">
   <ion-toolbar>

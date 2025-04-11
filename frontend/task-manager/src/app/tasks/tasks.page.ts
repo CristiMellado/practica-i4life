@@ -6,9 +6,15 @@ import { TaskService,Task } from '../services/task.service';
   styleUrls: ['./tasks.page.scss'],
   standalone:false
 })
+
+//refactorizo para que se muestre el departamento 
 export class TasksPage implements OnInit {
   tasks: any[] = [];
   newTaskTitle: string = '';
+  selectedDepartment: string = ''; // Para almacenar el departamento seleccionado
+  departments: string[] = ['Datos & IOT', 'Desarrollo Fullstack', 'Marketing', 'Diseño Web']; // Opciones de departamentos
+
+
   constructor(private taskService: TaskService) {}
   ngOnInit() {
     this.loadTasks();
@@ -19,12 +25,13 @@ export class TasksPage implements OnInit {
     });
   }
   addTask() {
-    if (this.newTaskTitle.trim() === '') return;
+    if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') return;
     
-    this.taskService.addTask(this.newTaskTitle).subscribe({
+    this.taskService.addTask(this.newTaskTitle, this.selectedDepartment).subscribe({
       next: serverResponse=> {
         this.tasks.push(serverResponse);
-      this.newTaskTitle = '';
+        this.newTaskTitle = '';
+        this.selectedDepartment = '';
       },
       error: serverError=> {
         console.error(serverError)

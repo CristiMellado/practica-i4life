@@ -1,0 +1,19 @@
+//estilos al toolbar
+
+ion-toolbar{
+    --background: #34a1b5;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+}
+
+.centered-button {
+    --background:#947078;
+    width: 70%;          /* Ancho del botón, ajusta este porcentaje */
+    max-width: 300px;    /* Opcional, para limitar el tamaño máximo */
+    margin: 0 auto;      /* Centra el botón horizontalmente */
+    display: flex;
+    justify-content: center; /* Centra el contenido dentro del botón */
+    align-items: center;     /* Centra el texto dentro del botón */
+    padding: 10px;      /* Añadir un poco de espacio dentro del botón */
+  }

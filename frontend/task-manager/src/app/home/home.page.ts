@@ -11,20 +11,31 @@ import { AuthService } from '../services/auth.service';
 export class HomePage implements OnInit {
   tasks: Task[] = [];
   newTaskTitle: string = '';
+  selectedDepartment: string = ''; // Para almacenar el departamento seleccionado
+  departments: string[] = ['Datos & IOT', 'Desarrollo Fullstack', 'Marketing', 'Diseño Web']; // Opciones de departamentos
+
+
   constructor(
     private taskService: TaskService,
     private authService: AuthService) {}
   ngOnInit() {
     this.loadTasks();
   }
-  loadTasks() {
-    this.taskService.getTasks().subscribe((tasks) => (this.tasks = tasks));
+  loadTasks() { //agregue aquí mi método para recibir todas las tareas
+    this.taskService.getAllTasks().subscribe((tasks) => (this.tasks = tasks));
   }
   addTask() {
-    if (!this.newTaskTitle.trim()) return;
-    this.taskService.addTask(this.newTaskTitle).subscribe((task) => {
-      this.tasks.push(task);
-      this.newTaskTitle = '';
+    if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') return;
+    
+    this.taskService.addTask(this.newTaskTitle, this.selectedDepartment).subscribe({
+      next: serverResponse=> {
+        this.tasks.push(serverResponse);
+        this.newTaskTitle = '';
+        this.selectedDepartment = '';
+      },
+      error: serverError=> {
+        console.error(serverError)
+      }
     });
   }
   toggleTask(task: Task) {

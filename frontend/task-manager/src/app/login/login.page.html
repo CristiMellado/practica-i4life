@@ -4,6 +4,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
+
+  <div class="image-container">
+    <img src="assets/icon/iniciar_sesion.png" alt="Iniciar Sesión" class="login-image">
+  </div>
+
   <ion-item>
     <ion-input [(ngModel)]="username" placeholder="Usuario"></ion-input>
   </ion-item>
@@ -14,6 +19,6 @@
       placeholder="Contraseña"
     ></ion-input>
   </ion-item>
-  <ion-button expand="full" (click)="login()">Ingresar</ion-button>
+  <ion-button expand="inset" class="centered-button" (click)="login()">Ingresar</ion-button>
 </ion-content>
 
