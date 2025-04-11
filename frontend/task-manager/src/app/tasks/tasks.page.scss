@@ -11,14 +11,29 @@ ion-toolbar{
   }
 
 
+  /* Estilo para el ion-label (Departamento) */
+ion-label {
+  margin-right: 10px; /* Espacio entre el label y el select */
+  font-size: 14px;
+  color: #333;
+  width: 30%; /* Controla el ancho del label */
+}
+
+/* Estilo para el ion-select */
+ion-select {
+  width: 60%; /* Controla el ancho del select */
+}
+
+
   ion-button.add-btn {
     --background: #947078;
     color:white;
     font-weight: bold;
     font-size:16px;
     padding: 15px;
-    width: 10%;
+    width: auto;
     --border-radius: 15px;
+    margin-left: 45%;
 
   
     &:hover{

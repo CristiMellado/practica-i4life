@@ -1,11 +1,24 @@
 //estilos al toolbar
-
 ion-toolbar{
     --background: #34a1b5;
     text-align: center;
     color: white;
     text-transform: uppercase;
 }
+
+.image-container {
+    display: flex;           
+    justify-content: center; 
+    align-items: center;     
+    height: 120px;           
+    margin-bottom: 20px;     
+    margin-top: 10px;
+  }
+  
+  .login-image {
+    max-width: 80%;   
+    height: auto;     
+  }
 
 .centered-button {
     --background:#947078;
