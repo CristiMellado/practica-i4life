@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const UserSchema = new mongoose.Schema({
 username: { type: String, required: true, unique: true },
-password: { type: String, required: true } //,user
+password: { type: String, required: true } 
 });
 // Hashear la contraseña antes de guardar
 UserSchema.pre('save', async function (next) {

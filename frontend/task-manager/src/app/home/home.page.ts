@@ -33,6 +33,7 @@ export class HomePage implements OnInit {
     });
   }
   deleteTask(task: Task) {
+    console.log('Tarea que se quiere eliminar:', task);
     this.taskService.deleteTask(task._id!).subscribe(() => {
       this.tasks = this.tasks.filter((t) => t._id !== task._id);
     });

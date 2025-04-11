@@ -4,7 +4,6 @@ ion-toolbar{
   --background:#ebebec;
   color: black;
   text-align: center;
-  text-transform: uppercase;
   padding: 20px;
 }
 
@@ -39,10 +38,17 @@ ion-button.add-btn {
 
   &:hover{
     --background:#7A5E51;
-    color: black;
+    color: wheat;
     transform: scale(1.05);
     transition: all 0.3s ease;
   }
+}
+
+ion-button.close-btn {
+  border-radius: 15px;   
+  border: 1px solid black; 
+  padding: 3px;      
+  margin-top: 10px;
 }
 
 ion-content {
@@ -76,3 +82,4 @@ ion-content {
   text-decoration: line-through;
   color: gray;
   }
+
