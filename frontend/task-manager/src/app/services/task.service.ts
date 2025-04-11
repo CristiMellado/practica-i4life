@@ -7,6 +7,10 @@ export interface Task {
   title: string;
   completed: boolean;
   department?: string, //añado el nuevo campo de mi capa modelo
+  userId?: {
+    _id: string;
+    username: string;
+  };
 }
 @Injectable({
   providedIn: 'root',

@@ -6,7 +6,8 @@ const authMiddleware = require("../middleware/auth.middleware");
 // Obtener todas las tareas
 router.get("/tasks", async (req, res) => {
   try {
-    const tasks = await Task.find();
+    //const tasks = await Task.find();
+    const tasks = await Task.find().populate('userId', 'username'); //me muestra el username
     res.json(tasks);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener tareas" });

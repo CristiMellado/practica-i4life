@@ -15,7 +15,9 @@
   <ion-list>
     <ion-item *ngFor="let task of tasks">
       <ion-label [class.completed]="task.completed">
-        {{ task.title }}
+       <h2> {{ task.title }} </h2>
+       <p>Departamento: {{ task.department }}</p>
+       <p>Responsable: {{ task.userId?.username }}</p>
       </ion-label>
       <ion-checkbox
         slot="end"
