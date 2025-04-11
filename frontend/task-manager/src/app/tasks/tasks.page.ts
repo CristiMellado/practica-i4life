@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService,Task } from '../services/task.service';
+import { AuthService } from '../services/auth.service';
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.page.html',
@@ -15,7 +17,9 @@ export class TasksPage implements OnInit {
   departments: string[] = ['Datos & IOT', 'Desarrollo Fullstack', 'Marketing', 'Diseño Web']; // Opciones de departamentos
 
 
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private authService: AuthService) {}
   ngOnInit() {
     this.loadTasks();
   }
@@ -45,5 +49,9 @@ export class TasksPage implements OnInit {
     this.taskService.deleteTask(task._id!).subscribe(() => {  //accedo en mi objeto a su atributo id
       this.tasks = this.tasks.filter((t) => t._id !== task._id);
     });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
