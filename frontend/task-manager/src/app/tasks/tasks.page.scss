@@ -10,6 +10,19 @@ ion-toolbar{
     --background: #6bc0bb;
   }
 
+  .header-content {
+    display: flex;                
+    align-items: center;          
+  }
+  
+  .image-container {
+    margin-right: 10px;          
+  }
+  
+  .tareas {
+    max-width: 60px;             
+    height: auto;
+  }
 
   /* Estilo para el ion-label (Departamento) */
 ion-label {

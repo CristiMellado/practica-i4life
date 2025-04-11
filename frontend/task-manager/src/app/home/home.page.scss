@@ -1,5 +1,20 @@
 //estilos a toolbar
 
+.header-content {
+  display: flex;                
+  align-items: center;          
+}
+
+.image-container {
+  margin-top: 10px;
+  margin-right: 10px;          
+}
+
+.gestor {
+  max-width: 60px;             
+  height: auto;
+}
+
 ion-toolbar{
   --background:#ebebec;
   color: black;
@@ -46,9 +61,15 @@ ion-button.add-btn {
 
 ion-button.close-btn {
   border-radius: 15px;   
-  border: 1px solid black; 
   padding: 3px;      
   margin-top: 10px;
+
+  &:hover{
+    --background:#7A5E51;
+    color: wheat;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+  }
 }
 
 ion-content {
