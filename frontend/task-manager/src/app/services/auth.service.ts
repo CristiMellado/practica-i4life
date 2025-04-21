@@ -19,13 +19,14 @@ export class AuthService {
   }
   login(username: string, password: string) {
     return this.http
-      .post<{ token: string, role: string}>(`${this.apiUrl}/login`, { username, password })
+      .post<{ token: string, role: string, username:string}>(`${this.apiUrl}/login`, { username, password })
       .pipe(
         tap((response) => {
           localStorage.setItem('token', response.token);
           this.authState.next(true);
           localStorage.setItem('role', response.role)
-      
+          localStorage.setItem('username', response.username); 
+          this.authState.next(true);
         })
       );
   }

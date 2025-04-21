@@ -6,7 +6,11 @@ export interface Task {
   _id?: string;
   title: string;
   completed: boolean;
+  //aqui añado las variables create y update para acceder a ellas
+  createdAt : string;
+  updatedAt: string;
   department?: string, //añado el nuevo campo de mi capa modelo
+  status?: 'Todo' | 'In Progress' | 'Completed'; //añado el campo status para saber en cual se encuentra
   userId?: {
     _id: string;
     username: string;
@@ -31,10 +35,10 @@ export class TaskService {
     return this.http.get<Task[]>(this.apiUrl, { headers });
     }
 
-  // Refactorizo para agregar el departamento  
-  addTask(title: string, department: string,): Observable<Task> {
+  // Refactorizo para agregar el departamento  y el status
+  addTask(title: string, department: string, status: string = 'Todo'): Observable<Task> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    return this.http.post<Task>(this.apiUrl, { title, department},{headers}); //agrege headers //Deparment
+    return this.http.post<Task>(this.apiUrl, { title, department,status},{headers}); 
   }
   toggleTask(id: string): Observable<Task> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`); //lo añadi
@@ -44,7 +48,14 @@ export class TaskService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`); //lo añadi
     return this.http.delete(`${this.apiUrl}/tasks/${id}`, {headers});
   }
+
+  //metodo para actualizar el estado de una tarea
+  updateTaskStatus(id: string, status: 'Todo'  | 'Completed'): Observable<Task> {
+    return this.http.put<Task>(`${this.apiUrl}/tasks/${id}/status`, { status });
+  }
 }
+
+
 
 /*import { Injectable } from '@angular/core';
 

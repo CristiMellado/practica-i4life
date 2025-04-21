@@ -1,17 +1,41 @@
-ion-toolbar{
+ion-toolbar {
     --background: #34a1b5;
     text-align: center;
     color: white;
     text-transform: uppercase;
-}
-
-.registrar-button {
-    --background:#947078;
-    width: 70%;          /* Ancho del botón, ajusta este porcentaje */
-    max-width: 300px;    /* Opcional, para limitar el tamaño máximo */
-    margin: 0 auto;      /* Centra el botón horizontalmente */
-    display: flex;
-    justify-content: center; /* Centra el contenido dentro del botón */
-    align-items: center;     /* Centra el texto dentro del botón */
-    padding: 10px;      /* Añadir un poco de espacio dentro del botón */
   }
+
+  .image-container {
+    display: flex;           
+    justify-content: center; 
+    align-items: center;     
+    height: 150px;           
+    margin-bottom: 20px;     
+    margin-top: 10px;
+  }
+  
+  .registrar-image {
+    max-width: 70%;   
+    height: auto;     
+  }
+  
+  .content-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .form-inner {
+    width: 100%;
+    max-width: 400px;
+    padding: 16px;
+  }
+  
+  

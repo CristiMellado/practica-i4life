@@ -15,12 +15,14 @@ export class TasksPage implements OnInit {
   newTaskTitle: string = '';
   selectedDepartment: string = ''; // Para almacenar el departamento seleccionado
   departments: string[] = ['Datos & IOT', 'Desarrollo Fullstack', 'Marketing', 'Diseño Web']; // Opciones de departamentos
-
+  username: string = ''; 
+  //status: string = 'Todo';
 
   constructor(
     private taskService: TaskService,
     private authService: AuthService) {}
   ngOnInit() {
+    this.username = localStorage.getItem('username') || '';
     this.loadTasks();
   }
   loadTasks() {
@@ -36,6 +38,7 @@ export class TasksPage implements OnInit {
         this.tasks.push(serverResponse);
         this.newTaskTitle = '';
         this.selectedDepartment = '';
+        //this.status = 'Todo'; //aqui añadimos tambien el status
       },
       error: serverError=> {
         console.error(serverError)

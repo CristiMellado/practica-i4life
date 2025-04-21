@@ -21,6 +21,71 @@ router.get('/', authMiddleware,async (req, res) => {
     res.json(tasks);
 });
 
+
+// Refactorización  de mi post cuando recibe el departamento
+router.post('/', authMiddleware, async (req, res) => {
+  try {
+    const { title, department,status } = req.body; // Recibimos el título y el departamento desde el cuerpo de la solicitud
+    
+    if (!title) {
+      return res.status(400).json({ error: "El título es obligatorio" });
+    }
+    // Validamos que el departamento esté en el enum de valores permitidos
+    const validDepartments = ['Datos & IOT', 'Desarrollo Fullstack', 'Marketing', 'Diseño Web'];
+    if (department && !validDepartments.includes(department)) {
+      return res.status(400).json({ error: "Departamento inválido" });
+    }
+
+    // Creamos la nueva tarea con los datos recibidos
+    const task = new Task({
+      title,
+      completed: false, 
+      userId: req.userId, 
+      department, // Incluimos el departamento si fue enviado
+      status: status || 'Todo',
+    });
+    
+    // Guardamos la tarea en la base de datos
+    await task.save();
+    
+    // Respondemos con la tarea creada
+    res.status(201).json(task);
+  } catch (error) {
+    res.status(500).json({ error: "Error al crear la tarea" });
+  }
+});
+
+
+// Marcar una tarea como completada
+router.put("/tasks/:id/status", async (req, res) => {
+  
+    const taskId = req.params.id;
+    const newStatus = req.body.status;
+  
+    // Aquí deberías buscar la tarea y actualizarla
+    // por ejemplo usando Mongoose:
+    Task.findByIdAndUpdate(taskId, { status: newStatus }, { new: true })
+      .then(updatedTask => res.json(updatedTask))
+      .catch(err => res.status(500).json({ error: err }));
+  
+});
+
+
+// Eliminar una tarea
+router.delete("/tasks/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Task.findByIdAndDelete(id);
+    res.json({ message: "Tarea eliminada" });
+  } catch (error) {
+    res.status(500).json({ error: "Error al eliminar la tarea" });
+  }
+});
+module.exports = router;
+
+
+
+
 /*  Agregar una nueva tarea
 router.post("/tasks", authMiddleware ,async (req, res) => { // comento para probar que no me falle más
   try {
@@ -42,64 +107,3 @@ router.post("/tasks", authMiddleware ,async (req, res) => { // comento para prob
     await task.save();
     res.status(201).json(task);
     }); */
-
-    // Refactorización  de mi post cuando recibe el departamento
-router.post('/', authMiddleware, async (req, res) => {
-  try {
-    const { title, department } = req.body; // Recibimos el título y el departamento desde el cuerpo de la solicitud
-
-    if (!title) {
-      return res.status(400).json({ error: "El título es obligatorio" });
-    }
-    // Validamos que el departamento esté en el enum de valores permitidos
-    const validDepartments = ['Datos & IOT', 'Desarrollo Fullstack', 'Marketing', 'Diseño Web'];
-    if (department && !validDepartments.includes(department)) {
-      return res.status(400).json({ error: "Departamento inválido" });
-    }
-
-    // Creamos la nueva tarea con los datos recibidos
-    const task = new Task({
-      title,
-      completed: false, 
-      userId: req.userId, 
-      department // Incluimos el departamento si fue enviado
-    });
-
-    // Guardamos la tarea en la base de datos
-    await task.save();
-
-    // Respondemos con la tarea creada
-    res.status(201).json(task);
-  } catch (error) {
-    res.status(500).json({ error: "Error al crear la tarea" });
-  }
-});
-
-
-// Marcar una tarea como completada
-router.put("/tasks/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const task = await Task.findById(id);
-    if (!task) return res.status(404).json({ error: "Tarea no encontrada" });
-    task.completed = !task.completed;
-    await task.save();
-    res.json(task);
-  } catch (error) {
-    res.status(500).json({ error: "Error al actualizar la tarea" });
-  }
-});
-
-
-
-// Eliminar una tarea
-router.delete("/tasks/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    await Task.findByIdAndDelete(id);
-    res.json({ message: "Tarea eliminada" });
-  } catch (error) {
-    res.status(500).json({ error: "Error al eliminar la tarea" });
-  }
-});
-module.exports = router;

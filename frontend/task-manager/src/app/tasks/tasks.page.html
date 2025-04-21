@@ -4,12 +4,21 @@
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
 
-    <div class="image-container">
-      <img src="assets/icon/tareas.png" alt="tareas" class="tareas">
+    <div class="toolbar-content">
+
+      <ion-title>Mis Tareas</ion-title>
+
+      <!-- Contenedor para alinear el saludo a la derecha -->
+      <div class="username-container">
+        <ion-text>
+          <ion-icon name="person"></ion-icon>
+          Hola, {{ username }}
+        </ion-text>
+      </div>
     </div>
-    <ion-title>Mis Tareas</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <!-- Aquí es donde se añade el formulario para nueva tarea -->
 <ion-item>

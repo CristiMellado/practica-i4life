@@ -2,9 +2,25 @@ ion-toolbar{
     --background:#ebebec;
     color: black;
     text-align: center;
-    text-transform: uppercase;
     padding: 20px;
   }
+
+  .toolbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .username-container {
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 15px;
+    color: #333;
+  }
+  
   
   ion-content{
     --background: #6bc0bb;

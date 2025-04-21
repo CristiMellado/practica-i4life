@@ -13,12 +13,13 @@ export class HomePage implements OnInit {
   newTaskTitle: string = '';
   selectedDepartment: string = ''; // Para almacenar el departamento seleccionado
   departments: string[] = ['Datos & IOT', 'Desarrollo Fullstack', 'Marketing', 'Diseño Web']; // Opciones de departamentos
-
+  username: string = '';
 
   constructor(
     private taskService: TaskService,
     private authService: AuthService) {}
   ngOnInit() {
+    this.username = localStorage.getItem('username') || '';
     this.loadTasks();
   }
   loadTasks() { //agregue aquí mi método para recibir todas las tareas
@@ -52,6 +53,19 @@ export class HomePage implements OnInit {
   
   logout() {
     this.authService.logout();
+  }
+
+  onStatusChange(task: Task, checked: boolean) {
+    // Decide el nuevo status en función de si está marcado o no
+    const newStatus: 'Todo' | 'Completed' = checked ? 'Completed' : 'Todo';
+  
+    // Llama al servicio para actualizar el status en el backend
+    this.taskService
+      .updateTaskStatus(task._id!, newStatus)
+      .subscribe(updatedTask => {
+        // Refresca el task local con el status devuelto
+        task.status = updatedTask.status;
+      }, err => console.error(err));
   }
   
 }
