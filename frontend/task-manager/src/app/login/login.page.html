@@ -9,6 +9,47 @@
     <img src="assets/icon/iniciar_sesion.png" alt="Iniciar Sesión" class="login-image">
   </div>
 
+  <ion-content>
+    <form #form="ngForm" (ngSubmit)="login()">
+      <ion-item>
+        <ion-input
+          name="username"
+          required
+          [(ngModel)]="username"
+          placeholder="Usuario"
+        ></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="form.submitted && !username">
+        El usuario es requerido
+      </ion-text>
+  
+      <ion-item>
+        <ion-input
+          name="password"
+          required
+          type="password"
+          [(ngModel)]="password"
+          placeholder="Contraseña"
+        ></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="form.submitted && !password">
+        La contraseña es requerida
+      </ion-text>
+  
+      <ion-button expand="inset" class="centered-button" type="submit">
+        Ingresar
+      </ion-button>
+    </form>
+  
+    <ion-button expand="inset" class="centered-button" (click)="goToRegister()">
+      Regístrate
+    </ion-button>
+  </ion-content>
+  
+
+
+
+  <!----
   <ion-item>
     <ion-input [(ngModel)]="username" placeholder="Usuario"></ion-input>
   </ion-item>
@@ -21,5 +62,5 @@
   </ion-item>
   <ion-button expand="inset" class="centered-button" (click)="login()">Ingresar</ion-button>
   <ion-button expand="inset" class="centered-button"  (click)="goToRegister()">Regístrate</ion-button>
-</ion-content>
+</ion-content> -->
 

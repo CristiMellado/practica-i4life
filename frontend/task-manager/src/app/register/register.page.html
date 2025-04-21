@@ -1,5 +1,9 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+
     <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -15,5 +19,5 @@
     <ion-input [(ngModel)]="password" type="password"></ion-input>
   </ion-item>
 
-  <ion-button expand="block" (click)="register()">Registrarse</ion-button>
+  <ion-button shape="round" color="tertiary" (click)="register()">Registrarse</ion-button>
 </ion-content>

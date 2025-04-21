@@ -15,7 +15,10 @@ module.exports = (req, res, next) => {
     }
     */
    req.userId = decoded.userId;
+   //añado tambien que me obtenga el rol
+   req.userRole = decoded.role;
    console.log('User id:', req.userId)
+   console.log('User role:', req.userRole);
     next();
   } catch (error) {
     res.status(401).json({ error: "Token inválido" });

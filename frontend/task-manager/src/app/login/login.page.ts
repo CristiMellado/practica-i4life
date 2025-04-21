@@ -13,10 +13,32 @@ export class LoginPage {
   password = '';
   constructor(private authService: AuthService, private router: Router) {}
   
+
   login() {
-    this.authService.login(this.username, this.password).subscribe(() => {
-      this.router.navigate(['/tasks']); //Aquí es donde eligido a que ruta me va a cargar la página
-    });
+    this.authService.login(this.username, this.password).subscribe({
+      next: (response: any) => {
+        switch (response.role) {
+          case 'user': {
+            this.router.navigate(['/tasks']); //Aquí es donde eligido a que ruta me va a cargar la página
+            break;
+          }
+          case 'admin': {
+            this.router.navigate(['/home']); //Aquí es donde eligido a que ruta me va a cargar la página
+            break;
+
+          }
+          default: {
+            alert('user role not currently managed')
+            console.error('user role not currently managed')
+          }
+        }
+
+        
+      },
+      error:(error: any) => {
+        console.error(error)
+      }
+    })
   }
 
   goToRegister() {
