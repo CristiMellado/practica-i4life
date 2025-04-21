@@ -17,8 +17,16 @@ const routes: Routes = [
   },
   {
     path: 'tasks',
-    loadChildren: () => import('./tasks/tasks.module').then( m => m.TasksPageModule)
+    loadChildren: () =>
+      import('./tasks/tasks.module').then( m => m.TasksPageModule),
+    canActivate: [AuthGuard],
+   
   },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+
 ];
 @NgModule({
   imports: [

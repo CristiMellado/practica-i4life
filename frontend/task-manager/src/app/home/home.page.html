@@ -1,14 +1,19 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+
     <div class="image-container">
       <img src="assets/icon/gestor.png" alt="gestor" class="gestor">
     </div>
-    <ion-title class="tarea"> Gestor de Tareas</ion-title>
+    <ion-title class="tarea">Gestor de Tareas</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logout()" class="close-btn">Cerrar sesión</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content class="ion-padding">
   <ion-item>
@@ -18,16 +23,16 @@
   <ion-list>
     <ion-item *ngFor="let task of tasks">
       <ion-label [class.completed]="task.completed">
-       <h2> {{ task.title }} </h2>
-       <p>Departamento: {{ task.department }}</p>
-       <p>Responsable: {{ task.userId?.username }}</p>
+        <h2>{{ task.title }}</h2>
+        <p>Departamento: {{ task.department }}</p>
+        <p>Responsable: {{ task.userId?.username }}</p>
       </ion-label>
       <ion-checkbox
         slot="end"
         [(ngModel)]="task.completed"
         (ionChange)="toggleTask(task)"
       ></ion-checkbox>
-      <ion-button color="danger" fill="clear" (click)="deleteTask(task)"> 
+      <ion-button color="danger" fill="clear" (click)="deleteTask(task)">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>

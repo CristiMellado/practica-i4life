@@ -1,3 +1,17 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<!-- Definir el menú -->
+<ion-menu side="start" menuId="first" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item button (click)="logout()">Cerrar sesión</ion-item>
+      <!-- Otros elementos de menú si es necesario -->
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- Aquí se renderizan las páginas de acuerdo a las rutas -->
+<ion-router-outlet id="main-content"></ion-router-outlet>
