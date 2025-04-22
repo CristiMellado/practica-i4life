@@ -25,7 +25,7 @@ router.get('/', authMiddleware,async (req, res) => {
 // Refactorización  de mi post cuando recibe el departamento
 router.post('/', authMiddleware, async (req, res) => {
   try {
-    const { title, department,status } = req.body; // Recibimos el título y el departamento desde el cuerpo de la solicitud
+    const { title, department,status, dueDate } = req.body; // Recibimos el título y el departamento desde el cuerpo de la solicitud
     
     if (!title) {
       return res.status(400).json({ error: "El título es obligatorio" });
@@ -36,6 +36,13 @@ router.post('/', authMiddleware, async (req, res) => {
       return res.status(400).json({ error: "Departamento inválido" });
     }
 
+    //validamos que la fecha que se proporciona es válida
+    if (dueDate && isNaN(new Date(dueDate).getTime())) {
+      return res.status(400).json({ error: "Fecha de vencimiento inválida" });
+    }
+
+
+
     // Creamos la nueva tarea con los datos recibidos
     const task = new Task({
       title,
@@ -43,6 +50,7 @@ router.post('/', authMiddleware, async (req, res) => {
       userId: req.userId, 
       department, // Incluimos el departamento si fue enviado
       status: status || 'Todo',
+      dueDate: dueDate || null, //añadimos la fecha
     });
     
     // Guardamos la tarea en la base de datos

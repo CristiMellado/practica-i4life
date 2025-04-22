@@ -17,6 +17,11 @@ department: {
     enum: ['Todo', 'Completed'],
     default: 'Todo'
   },
+  // fecha de vencimiento
+  dueDate: { 
+    type: Date,
+    required: false 
+  },
 
 
 /*con timestamps, agrga createAt y updateAt a cada documento útil 

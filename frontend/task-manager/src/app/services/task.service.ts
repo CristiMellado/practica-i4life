@@ -15,6 +15,9 @@ export interface Task {
     _id: string;
     username: string;
   };
+
+  //campo fecha
+  dueDate?: Date;
 }
 @Injectable({
   providedIn: 'root',
@@ -35,14 +38,14 @@ export class TaskService {
     return this.http.get<Task[]>(this.apiUrl, { headers });
     }
 
-  // Refactorizo para agregar el departamento  y el status
-  addTask(title: string, department: string, status: string = 'Todo'): Observable<Task> {
+  // Refactorizo para agregar el departamento  y el status y la fecha y poner el DAte
+  addTask(title: string, department: string, status: string = 'Todo', dueDate:Date|null): Observable<Task> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    return this.http.post<Task>(this.apiUrl, { title, department,status},{headers}); 
+    return this.http.post<Task>(this.apiUrl, { title, department,status, dueDate},{headers}); 
   }
   toggleTask(id: string): Observable<Task> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`); //lo añadi
-    return this.http.put<Task>(`${this.apiUrl}/tasks/${id}`, {headers});
+    return this.http.put<Task>(`${this.apiUrl}/tasks/${id}/status`, {headers});
   }
   deleteTask(id: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`); //lo añadi

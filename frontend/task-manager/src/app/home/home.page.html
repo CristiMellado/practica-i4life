@@ -24,41 +24,76 @@
   </ion-item> -->
     
     <!-- Añadimos el ion-grid para organizar las tareas en una cuadrícula -->
-    <ion-grid>
-      <ion-row>
+    <div style="display: flex; justify-content: center;">
         <!-- Usamos ngFor para crear un ion-col para cada tarea, asegurando que haya 4 columnas por fila -->
-        <ion-col size="6" size-md="3" *ngFor="let task of tasks">
-          <ion-card
-          [ngClass]="{
-            'card-iot'       : task.department === 'Datos & IOT',
-            'card-fullstack' : task.department === 'Desarrollo Fullstack',
-            'card-marketing' : task.department === 'Marketing',
-            'card-diseno-web': task.department === 'Diseño Web'
-          }"
-        >
-            <ion-card-header>
-              <ion-card-title>{{ task.title }}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <p><strong>Responsable: </strong> {{ task.userId?.username }}</p>
-              <p><strong>Departamento: </strong>{{ task.department }}</p>
-              <p><strong>Creada el:</strong> {{ task.createdAt| date:'short' }}</p>
-              <p><strong>Última modificación:</strong> {{ task.updatedAt | date:'short' }}</p>
-              <p><strong>Estado: </strong>{{ task.status }}</p>
-  
-              <ion-checkbox
-                slot="start"
-                [(ngModel)]="task.completed"
-                (ionChange)="onStatusChange(task, $event.detail.checked)"
-              >Completar</ion-checkbox>
-  
-              <ion-button color="danger" fill="clear" (click)="deleteTask(task)">
-                <ion-icon name="trash"></ion-icon>
-              </ion-button>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+         <div style="width: 40%;">
+          <h2>Sin completar</h2>
+           <div  *ngFor="let task of todoTasks">
+             <ion-card
+             [ngClass]="{
+               'card-iot'       : task.department === 'Datos & IOT',
+               'card-fullstack' : task.department === 'Desarrollo Fullstack',
+               'card-marketing' : task.department === 'Marketing',
+               'card-diseno-web': task.department === 'Diseño Web'
+             }"
+           >
+               <ion-card-header>
+                 <ion-card-title>{{ task.title }}</ion-card-title>
+               </ion-card-header>
+               <ion-card-content>
+                 <p><strong>Responsable: </strong> {{ task.userId?.username }}</p>
+                 <p><strong>Departamento: </strong>{{ task.department }}</p>
+                 <p><strong>Creada el:</strong> {{ task.createdAt| date:'short' }}</p>
+                 <p><strong>Última modificación:</strong> {{ task.updatedAt | date:'short' }}</p>
+                 <p><strong>Estado: </strong>{{ task.status }}</p>
+     
+                 <ion-checkbox
+                   slot="start"
+                   [(ngModel)]="task.completed"
+                   (ionChange)="onStatusChange(task, $event.detail.checked)"
+                 >Completar</ion-checkbox>
+     
+                 <ion-button color="danger" fill="clear" (click)="deleteTask(task)">
+                   <ion-icon name="trash"></ion-icon>
+                 </ion-button>
+               </ion-card-content>
+             </ion-card>
+           </div>
+         </div>
+         <div style="width: 40%;">
+          <h2>Completadas</h2>
+           <div *ngFor="let task of completedTasks">
+             <ion-card
+             [ngClass]="{
+               'card-iot'       : task.department === 'Datos & IOT',
+               'card-fullstack' : task.department === 'Desarrollo Fullstack',
+               'card-marketing' : task.department === 'Marketing',
+               'card-diseno-web': task.department === 'Diseño Web'
+             }"
+           >
+               <ion-card-header>
+                 <ion-card-title>{{ task.title }}</ion-card-title>
+               </ion-card-header>
+               <ion-card-content>
+                 <p><strong>Responsable: </strong> {{ task.userId?.username }}</p>
+                 <p><strong>Departamento: </strong>{{ task.department }}</p>
+                 <p><strong>Creada el:</strong> {{ task.createdAt| date:'short' }}</p>
+                 <p><strong>Última modificación:</strong> {{ task.updatedAt | date:'short' }}</p>
+                 <p><strong>Estado: </strong>{{ task.status }}</p>
+     
+                 <ion-checkbox
+                   slot="start"
+                   [(ngModel)]="task.completed"
+                   (ionChange)="onStatusChange(task, $event.detail.checked)"
+                 >Completar</ion-checkbox>
+     
+                 <ion-button color="danger" fill="clear" (click)="deleteTask(task)">
+                   <ion-icon name="trash"></ion-icon>
+                 </ion-button>
+               </ion-card-content>
+             </ion-card>
+           </div>
+         </div>
+    </div>
   </ion-content>
   

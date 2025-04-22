@@ -16,7 +16,8 @@ export class TasksPage implements OnInit {
   selectedDepartment: string = ''; // Para almacenar el departamento seleccionado
   departments: string[] = ['Datos & IOT', 'Desarrollo Fullstack', 'Marketing', 'Diseño Web']; // Opciones de departamentos
   username: string = ''; 
-  //status: string = 'Todo';
+  status: string = 'Todo';
+  selectedDueDate:string = ''; //almacenar fecha de vencimiento
 
   constructor(
     private taskService: TaskService,
@@ -33,12 +34,15 @@ export class TasksPage implements OnInit {
   addTask() {
     if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') return;
     
-    this.taskService.addTask(this.newTaskTitle, this.selectedDepartment).subscribe({
+    const dueDate: Date | null = this.selectedDueDate ? new Date(this.selectedDueDate) : null;
+
+    this.taskService.addTask(this.newTaskTitle, this.selectedDepartment, this.status, dueDate as Date | null).subscribe({
       next: serverResponse=> {
         this.tasks.push(serverResponse);
         this.newTaskTitle = '';
         this.selectedDepartment = '';
-        //this.status = 'Todo'; //aqui añadimos tambien el status
+        this.status = 'Todo'; //aqui añadimos tambien el status
+        this.selectedDueDate = '';
       },
       error: serverError=> {
         console.error(serverError)

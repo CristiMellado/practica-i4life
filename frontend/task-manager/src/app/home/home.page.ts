@@ -14,6 +14,8 @@ export class HomePage implements OnInit {
   selectedDepartment: string = ''; // Para almacenar el departamento seleccionado
   departments: string[] = ['Datos & IOT', 'Desarrollo Fullstack', 'Marketing', 'Diseño Web']; // Opciones de departamentos
   username: string = '';
+  status: string = 'Todo';
+
 
   constructor(
     private taskService: TaskService,
@@ -25,10 +27,11 @@ export class HomePage implements OnInit {
   loadTasks() { //agregue aquí mi método para recibir todas las tareas
     this.taskService.getAllTasks().subscribe((tasks) => (this.tasks = tasks));
   }
-  addTask() {
+  
+  /*addTask() {
     if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') return;
     
-    this.taskService.addTask(this.newTaskTitle, this.selectedDepartment).subscribe({
+    this.taskService.addTask(this.newTaskTitle, this.selectedDepartment, this.status).subscribe({
       next: serverResponse=> {
         this.tasks.push(serverResponse);
         this.newTaskTitle = '';
@@ -38,7 +41,7 @@ export class HomePage implements OnInit {
         console.error(serverError)
       }
     });
-  }
+  }*/
   toggleTask(task: Task) {
     this.taskService.toggleTask(task._id!).subscribe((updatedTask) => {
       task.completed = updatedTask.completed;
@@ -66,6 +69,13 @@ export class HomePage implements OnInit {
         // Refresca el task local con el status devuelto
         task.status = updatedTask.status;
       }, err => console.error(err));
+  }
+
+  get completedTasks() {
+    return this.tasks.filter((task)=>task.status === 'Completed')
+  }
+  get todoTasks() {
+    return this.tasks.filter((task)=>task.status === 'Todo')
   }
   
 }
