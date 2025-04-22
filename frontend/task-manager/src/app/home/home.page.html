@@ -17,11 +17,10 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!--
   <ion-item>
     <ion-input [(ngModel)]="newTaskTitle" placeholder="Nueva tarea"></ion-input>
     <ion-button (click)="addTask()" class="add-btn">Añadir</ion-button>
-  </ion-item> -->
+  </ion-item> 
     
     <!-- Añadimos el ion-grid para organizar las tareas en una cuadrícula -->
     <div style="display: flex; justify-content: center;">
@@ -43,8 +42,9 @@
                <ion-card-content>
                  <p><strong>Responsable: </strong> {{ task.userId?.username }}</p>
                  <p><strong>Departamento: </strong>{{ task.department }}</p>
-                 <p><strong>Creada el:</strong> {{ task.createdAt| date:'short' }}</p>
-                 <p><strong>Última modificación:</strong> {{ task.updatedAt | date:'short' }}</p>
+                 <p><strong>Creada el: </strong> {{ task.createdAt| date:'shortDate' }}</p>
+                 <p><strong>Última modificación:</strong> {{ task.updatedAt | date:'shortDate' }}</p>
+                 <p><strong>Fecha límite: </strong>{{task.dueDate | date: 'shortDate'}}</p>
                  <p><strong>Estado: </strong>{{ task.status }}</p>
      
                  <ion-checkbox
@@ -77,8 +77,9 @@
                <ion-card-content>
                  <p><strong>Responsable: </strong> {{ task.userId?.username }}</p>
                  <p><strong>Departamento: </strong>{{ task.department }}</p>
-                 <p><strong>Creada el:</strong> {{ task.createdAt| date:'short' }}</p>
-                 <p><strong>Última modificación:</strong> {{ task.updatedAt | date:'short' }}</p>
+                 <p><strong>Creada el:</strong> {{ task.createdAt| date:'shortDate' }}</p>
+                 <p><strong>Última modificación:</strong> {{ task.updatedAt | date:'shortDate' }}</p>
+                 <p><strong>Fecha límite: </strong>{{task.dueDate | date: 'shortDate'}}</p>
                  <p><strong>Estado: </strong>{{ task.status }}</p>
      
                  <ion-checkbox

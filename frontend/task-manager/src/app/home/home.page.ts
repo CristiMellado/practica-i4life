@@ -15,6 +15,7 @@ export class HomePage implements OnInit {
   departments: string[] = ['Datos & IOT', 'Desarrollo Fullstack', 'Marketing', 'Diseño Web']; // Opciones de departamentos
   username: string = '';
   status: string = 'Todo';
+  selectedDueDate:string = '';
 
 
   constructor(
@@ -28,20 +29,26 @@ export class HomePage implements OnInit {
     this.taskService.getAllTasks().subscribe((tasks) => (this.tasks = tasks));
   }
   
-  /*addTask() {
+  addTask() {
     if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') return;
-    
-    this.taskService.addTask(this.newTaskTitle, this.selectedDepartment, this.status).subscribe({
+
+
+    //IMPORANTE ESPECIFICAR EL UNDEFIND Y EL NULL 
+    const dueDate: Date | null = this.selectedDueDate ? new Date(this.selectedDueDate) : null;
+
+    this.taskService.addTask(this.newTaskTitle, this.selectedDepartment, this.status, dueDate as Date | null).subscribe({
       next: serverResponse=> {
         this.tasks.push(serverResponse);
         this.newTaskTitle = '';
         this.selectedDepartment = '';
+        this.status = 'Todo'; //aqui añadimos tambien el status
+        this.selectedDueDate = '';
       },
       error: serverError=> {
         console.error(serverError)
       }
     });
-  }*/
+  }
   toggleTask(task: Task) {
     this.taskService.toggleTask(task._id!).subscribe((updatedTask) => {
       task.completed = updatedTask.completed;

@@ -1,77 +1,128 @@
-ion-toolbar{
-    --background:#ebebec;
-    color: black;
-    text-align: center;
-    padding: 20px;
-  }
+/* Estilos para ion-toolbar */
+ion-toolbar {
+  --background: #ebebec;
+  color: black;
+  text-align: center;
+  padding: 20px;
+}
 
-  .toolbar-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .username-container {
-    margin-left: auto;
-    margin-right: 10px;
-    margin-top: 10px;
-    font-style: italic;
-    font-size: 15px;
-    color: #333;
-  }
-  
-  
-  ion-content{
-    --background: #6bc0bb;
-  }
 
-  .header-content {
-    display: flex;                
-    align-items: center;          
-  }
-  
-  .image-container {
-    margin-right: 10px;          
-  }
-  
-  .tareas {
-    max-width: 60px;             
-    height: auto;
-  }
+.toolbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
 
-  /* Estilo para el ion-label (Departamento) */
+/* Personalización del ion-datetime */
+ion-datetime {
+  --width: 80%;  /* Para asegurarnos de que el datetime no se estire demasiado */
+  max-width: 100px; /* Limita el tamaño del selector de fecha */
+}
+
+/* Estilo para el contenedor del formulario en 2 columnas */
+.form-container {
+  display: flex;
+  justify-content: space-between; /* Espacio entre las columnas */
+  gap: 20px; /* Espaciado entre las columnas */
+  flex-wrap: wrap; /* Asegura que el contenido se ajuste bien en pantallas pequeñas */
+  margin-top: 20px;
+  margin-left: 25px;
+}
+
+/* Columna izquierda (Nueva tarea y Departamento) */
+.left-column {
+  flex: 1; /* Hace que ocupe el mismo espacio disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 15px; /* Separación entre los elementos */
+}
+
+/* Columna derecha (Fecha límite de entrega) */
+.right-column {
+  flex: 1; /* Hace que ocupe el mismo espacio disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 5px; /* Separación entre los elementos */
+}
+
+/* Ajustes para ion-item (General) */
+ion-item {
+  --min-height: 50px; /* Altura mínima para cada item */
+  margin-bottom: 15px; /* Espacio entre los elementos del formulario */
+}
+
+/* Ajustes para ion-datetime */
+ion-datetime {
+  width: 40%; /* Asegura que el datetime no ocupe más de su espacio disponible */
+  max-width: 400px; /* Limita el tamaño máximo del selector de fecha */
+}
+
+/* Estilo para el botón */
+.add-btn {
+  margin-top: 5px; /* Separación para el botón */
+  --background: #947078;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 15px;
+  width: auto;
+  margin-left: 45%;
+}
+
+.add-btn:hover {
+  --background: #7A5E51;
+  color: black;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* Ajustes en el ion-select y el ion-label */
 ion-label {
-  margin-right: 10px; /* Espacio entre el label y el select */
   font-size: 14px;
   color: #333;
-  width: 30%; /* Controla el ancho del label */
 }
 
-/* Estilo para el ion-select */
 ion-select {
-  width: 60%; /* Controla el ancho del select */
+  width: 100%; /* Asegura que el select ocupe el 100% disponible */
+}
+
+ion-card {
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  background: #edd6d3;
+  margin: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+ion-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+ion-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+ion-card-subtitle {
+  font-size: 14px;
+  color: #666;
+}
+
+ion-card-content p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+ion-item {
+  --background: transparent;
+  --inner-padding-end: 0;
 }
 
 
-  ion-button.add-btn {
-    --background: #947078;
-    color:white;
-    font-weight: bold;
-    font-size:16px;
-    padding: 15px;
-    width: auto;
-    --border-radius: 15px;
-    margin-left: 45%;
-
-  
-    &:hover{
-      --background:#7A5E51;
-      color: black;
-      transform: scale(1.05);
-      transition: all 0.3s ease;
-    }
-
-    
-
-  }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService,Task } from '../services/task.service';
 import { AuthService } from '../services/auth.service';
 
+
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.page.html',
@@ -33,7 +35,9 @@ export class TasksPage implements OnInit {
   }
   addTask() {
     if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') return;
-    
+
+
+    //IMPORANTE ESPECIFICAR EL UNDEFIND Y EL NULL 
     const dueDate: Date | null = this.selectedDueDate ? new Date(this.selectedDueDate) : null;
 
     this.taskService.addTask(this.newTaskTitle, this.selectedDepartment, this.status, dueDate as Date | null).subscribe({

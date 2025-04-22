@@ -5,10 +5,7 @@
     </ion-buttons>
 
     <div class="toolbar-content">
-
       <ion-title>Mis Tareas</ion-title>
-
-      <!-- Contenedor para alinear el saludo a la derecha -->
       <div class="username-container">
         <ion-text>
           <ion-icon name="person"></ion-icon>
@@ -19,36 +16,65 @@
   </ion-toolbar>
 </ion-header>
 
-
-<!-- Aquí es donde se añade el formulario para nueva tarea -->
-<ion-item>
-  <ion-input [(ngModel)]="newTaskTitle" placeholder="Nueva tarea"></ion-input>
-  <ion-label>Departamento</ion-label>
-  <ion-select [(ngModel)]="selectedDepartment" placeholder="Selecciona un departamento">
-    <ion-select-option value="Datos & IOT">Datos & IOT</ion-select-option>
-    <ion-select-option value="Desarrollo Fullstack">Desarrollo Fullstack</ion-select-option>
-    <ion-select-option value="Marketing">Marketing</ion-select-option>
-    <ion-select-option value="Diseño Web">Diseño Web</ion-select-option>
-  </ion-select>
-</ion-item>
-
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let task of tasks">
-      <ion-label [class.completed]="task.completed">{{ task.title }}</ion-label>
-      <ion-checkbox
-        slot="start"
-        [(ngModel)]="task.completed"
-        (ionChange)="toggleTask(task)"
-      ></ion-checkbox>
-      <ion-button color="danger" fill="clear" (click)="deleteTask(task)">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
-    </ion-item>
-  </ion-list>
+  <!-- Contenedor de formulario en 2 columnas -->
+  <div class="form-container">
+    <!-- Primera columna: Nueva tarea y Departamento -->
+    <div class="left-column">
+      <!-- Formulario para nueva tarea -->
+      <ion-item class="task-item">
+        <ion-input [(ngModel)]="newTaskTitle" placeholder="Nueva tarea"></ion-input>
+      </ion-item>
 
-  <!-- Botón para añadir la tarea -->
-  <ion-item class="buton">
-    <ion-button (click)="addTask()" class="add-btn" expand="full">Añadir Tarea</ion-button>
-  </ion-item>
-</ion-content>
+      <ion-item class="department-item">
+        <ion-label>Departamento</ion-label>
+        <ion-select [(ngModel)]="selectedDepartment" interface="popover" placeholder="Selecciona un departamento" >
+          <ion-select-option value="Datos & IOT">Datos & IOT</ion-select-option>
+          <ion-select-option value="Desarrollo Fullstack">Desarrollo Fullstack</ion-select-option>
+          <ion-select-option value="Marketing">Marketing</ion-select-option>
+          <ion-select-option value="Diseño Web">Diseño Web</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!-- Segunda columna: Fecha límite -->
+    <div class="right-column">
+      <ion-item class="date-item">
+        <ion-label  class="fecha-label">Fecha límite de entrega</ion-label>
+        <ion-datetime [(ngModel)]="selectedDueDate" display-format="DD/MM/YYYY" presentation="date"></ion-datetime>
+      </ion-item>
+        <!-- Botón para añadir la tarea -->
+        <ion-item class="buton">
+          <ion-button (click)="addTask()" class="add-btn" expand="full">Añadir Tarea</ion-button>
+        </ion-item>
+    </div>
+  </div>
+
+ <ion-grid>
+  <ion-row>
+    <ion-col size="6" size-md="4" size-lg="3" *ngFor="let task of tasks">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ task.title }}</ion-card-title>
+          <ion-card-subtitle>Departamento: {{ task.department }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p *ngIf="task.dueDate">
+            Fecha límite: {{ task.dueDate | date: 'shortDate' }}
+          </p>
+          <ion-item lines="none">
+            <ion-checkbox
+              slot="start"
+              [(ngModel)]="task.completed"
+              (ionChange)="toggleTask(task)"
+            ></ion-checkbox>
+            <ion-label>Completada</ion-label>
+            <ion-button color="danger" fill="clear" (click)="deleteTask(task)" slot="end">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
