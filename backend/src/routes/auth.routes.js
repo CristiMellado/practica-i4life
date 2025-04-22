@@ -22,10 +22,13 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     console.log(user)
+
     if (!user || !(await bcrypt.compare(password, user.password))) {
     return res.status(401).json({ error: 'Credenciales incorrectas' });
     }
-    const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+
+    //en la firma añado el role para saber que usuario es 
+    const token = jwt.sign({ userId: user._id, role:user.role}, process.env.SECRET_KEY, { expiresIn: '1h' });
     res.json({ token, role: user.role, username: user.username});
     } catch (error) {
     res.status(500).json({ error: 'Error en el servidor' });

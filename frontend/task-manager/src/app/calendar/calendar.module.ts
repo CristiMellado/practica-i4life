@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { CalendarPageRoutingModule } from './calendar-routing.module';
 
@@ -13,7 +14,8 @@ import { CalendarPage } from './calendar.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CalendarPageRoutingModule
+    CalendarPageRoutingModule,
+    FullCalendarModule,
   ],
   declarations: [CalendarPage]
 })

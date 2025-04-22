@@ -9,7 +9,10 @@ import { AuthService } from './services/auth.service';
   standalone: false,
 })
 export class AppComponent {
+
+
   constructor(private router: Router, private authService: AuthService) {}
+
 
   logout() {
     // Elimina el token o cualquier información relacionada con la sesión

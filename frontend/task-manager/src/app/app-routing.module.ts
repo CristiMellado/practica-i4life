@@ -24,11 +24,11 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
-  },  {
-    path: 'calendar',
-    loadChildren: () => import('./calendar/calendar.module').then( m => m.CalendarPageModule)
   },
-
+  {
+    path: 'calendar',  // Ruta hacia la página calendar
+    loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarPageModule)
+  },
 
 
 
@@ -40,6 +40,14 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+
+
+
+
+
+
+
+
 
 /*const routes: Routes = [
   {

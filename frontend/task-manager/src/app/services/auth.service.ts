@@ -25,6 +25,8 @@ export class AuthService {
           localStorage.setItem('token', response.token);
           this.authState.next(true);
           localStorage.setItem('role', response.role)
+          console.log('role');
+       
           localStorage.setItem('username', response.username); 
           this.authState.next(true);
         })
@@ -42,6 +44,9 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+
 }
+
+
 
 
