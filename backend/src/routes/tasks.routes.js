@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Task = require("../models/Task");
 const authMiddleware = require("../middleware/auth.middleware");
-//añadir aqui el user
-const User = require("../models/user.model");
+//añadir aqui el user 
+const User = require("../models/user.model"); //aqui me daba el falló por no poner bien el nombre muy importante
 
 
 //Obtener todos los usuarios (solo el _id y username)
@@ -70,8 +70,8 @@ router.post('/', authMiddleware, async (req, res) => {
     const task = new Task({
       title,
       completed: false, 
-     // userId: req.userId, //objeto Id para usar el username
-      userId: assignedUserId,
+      userId: req.userId, //objeto Id para usar el username
+      //userId: assignedUserId,
       department, // Incluimos el departamento si fue enviado
       status: status || 'Todo',
       dueDate: dueDate || null, //añadimos la fecha

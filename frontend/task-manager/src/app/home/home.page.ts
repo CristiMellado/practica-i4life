@@ -43,7 +43,7 @@ export class HomePage implements OnInit {
     //IMPORANTE ESPECIFICAR EL UNDEFIND Y EL NULL 
     const dueDate: Date | null = this.selectedDueDate ? new Date(this.selectedDueDate) : null;
 
-    console.log(this.selectedUser);
+    console.log('este es el usuario',this.selectedUser);
     
     this.taskService.addTaskAdmin(this.newTaskTitle, this.selectedDepartment, this.status, dueDate as Date | null, this.selectedUser).subscribe({
       next: serverResponse=> {

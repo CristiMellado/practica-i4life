@@ -34,9 +34,9 @@
         <ion-item class="user-item">
           <ion-label>Asignar tarea</ion-label>
           <ion-select [(ngModel)]="selectedUser" interface="popover" placeholder="Asignar responsable" >
-            <ion-select-option *ngFor="let user of users" [value]="user._id">
-              {{ user.username }}
-            </ion-select-option>
+                <ion-select-option *ngFor="let user of users" [value]="user.username">
+      {{ user.username }}
+    </ion-select-option>
           </ion-select>
         </ion-item>
       </div>
