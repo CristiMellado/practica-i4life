@@ -1,12 +1,7 @@
 //estilos a toolbar
-
 .header-content {
   display: flex;                
   align-items: center;          
-}
-
-h1{
-  text-align: center;
 }
 
 h2{
@@ -151,11 +146,13 @@ ion-card {
 
 .form-container {
   display: flex;
-  justify-content: space-between; /* Espacio entre las columnas */
-  gap: 20px; /* Espaciado entre las columnas */
-  flex-wrap: wrap; /* Asegura que el contenido se ajuste bien en pantallas pequeñas */
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
   margin-top: 20px;
   margin-left: 25px;
+  padding-bottom: 20px; /* Espacio debajo */
+  align-items: stretch;
 }
 
 
@@ -174,3 +171,17 @@ ion-card {
   justify-content: flex-start;
   gap: 15px; /* Separación entre los elementos */
 }
+
+ion-avatar {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+
+.delete{
+  margin: 0;
+  padding: 0;
+  --padding-end: 8px;
+  height: 20px;
+}
+

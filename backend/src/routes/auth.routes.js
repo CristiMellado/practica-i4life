@@ -12,7 +12,7 @@ router.post("/register", async (req, res) => {
     await user.save();
     res.status(201).json({ message: "Usuario creado" });
   } catch (error) {
-    res.status(400).json({ error: "El usuario ya existe" });
+    res.status(400).json({ error: "Error al registrar" });
   }
 });
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService, Task } from '../services/task.service';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service'; //importamos el servicio de useService
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -23,10 +24,14 @@ export class HomePage implements OnInit {
 
   newTaskDescription: string = ''; //Variable para la descripción
 
+
+
   constructor(
     private taskService: TaskService,
     private userService: UserService, //crear el servicio para usar el usuario, la !
-    private authService: AuthService) {}
+    private authService: AuthService,
+    private alertController: AlertController
+    ) {}
 
   ngOnInit() {
     this.username = localStorage.getItem('username') || '';
@@ -40,7 +45,11 @@ export class HomePage implements OnInit {
   
   addTask() {
     console.log("addTask");
-    if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') return;
+    if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') {
+      // Si algún campo está vacío, mostramos un alert
+      this.presentAlert('Por favor, rellena todos los campos.');
+      return;
+    }
 
     //IMPORANTE ESPECIFICAR EL UNDEFIND Y EL NULL 
     const dueDate: Date | null = this.selectedDueDate ? new Date(this.selectedDueDate) : null;
@@ -56,12 +65,25 @@ export class HomePage implements OnInit {
         this.selectedDueDate = '';
         this.selectedUser = '';
         this.newTaskDescription=''; //añado la descripcion
+        this.presentAlert('La tarea se ha registrado con éxito'); //pongo la alerta
       },
       error: serverError=> {
         console.error(serverError)
       }
     });
   }
+
+  //metodo para mostrar la alerta 
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: message.includes('éxito') ? 'Tarea registrada' : 'Error',
+      message: message,
+      buttons: ['OK']
+    });
+  
+    await alert.present();
+  }
+
   toggleTask(task: Task) {
     this.taskService.toggleTask(task._id!).subscribe((updatedTask) => {
       task.completed = updatedTask.completed;

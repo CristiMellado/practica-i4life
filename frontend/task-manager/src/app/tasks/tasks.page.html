@@ -62,11 +62,11 @@
                 </p>
                 <p>Descripción: {{task.description}}</p>
                 <ion-item lines="none">
-                  <ion-checkbox
+                  <ion-toggle
                     slot="start"
                     [(ngModel)]="task.completed"
                     (ionChange)="onStatusChange(task, $event.detail.checked)"
-                  ></ion-checkbox>
+                  ></ion-toggle>
                   <ion-label>Completar</ion-label>
                   <ion-button color="danger" fill="clear" (click)="deleteTask(task)" slot="end">
                     <ion-icon name="trash"></ion-icon>
