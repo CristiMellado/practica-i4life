@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService, Task } from '../services/task.service';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service'; //importamos el servicio de useService
 
 @Component({
   selector: 'app-home',
@@ -16,33 +17,42 @@ export class HomePage implements OnInit {
   username: string = '';
   status: string = 'Todo';
   selectedDueDate:string = '';
-
+  selectedUser:string = '';
+  
+  users: { _id: string, username: string }[] = []; // Tipo correcto para los usuarios
 
   constructor(
     private taskService: TaskService,
+    private userService: UserService, //crear el servicio para usar el usuario, la !
     private authService: AuthService) {}
+
   ngOnInit() {
     this.username = localStorage.getItem('username') || '';
+    console.log('Username cargado en HomePage:', this.username)
     this.loadTasks();
+    this.loadUsers(); //cargo los usuarios 
   }
   loadTasks() { //agregue aquí mi método para recibir todas las tareas
     this.taskService.getAllTasks().subscribe((tasks) => (this.tasks = tasks));
   }
   
   addTask() {
+    console.log("addTask");
     if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') return;
-
 
     //IMPORANTE ESPECIFICAR EL UNDEFIND Y EL NULL 
     const dueDate: Date | null = this.selectedDueDate ? new Date(this.selectedDueDate) : null;
 
-    this.taskService.addTask(this.newTaskTitle, this.selectedDepartment, this.status, dueDate as Date | null).subscribe({
+    console.log(this.selectedUser);
+    
+    this.taskService.addTaskAdmin(this.newTaskTitle, this.selectedDepartment, this.status, dueDate as Date | null, this.selectedUser).subscribe({
       next: serverResponse=> {
         this.tasks.push(serverResponse);
         this.newTaskTitle = '';
         this.selectedDepartment = '';
         this.status = 'Todo'; //aqui añadimos tambien el status
         this.selectedDueDate = '';
+        this.selectedUser = '';
       },
       error: serverError=> {
         console.error(serverError)
@@ -84,6 +94,16 @@ export class HomePage implements OnInit {
   get todoTasks() {
     return this.tasks.filter((task)=>task.status === 'Todo')
   }
+
+  //método para cargar los usuarios
+  loadUsers() {
+  this.userService.getAllUsers().subscribe(users => {
+    console.log("Usuarios recibidos:", users); // 👈 Revisa esto en la consola del navegador
+    this.users = users;
+  }, error => {
+    console.error("Error al cargar usuarios:", error);
+  });
+}
   
 }
 

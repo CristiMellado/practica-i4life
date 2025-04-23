@@ -36,7 +36,6 @@ export class TasksPage implements OnInit {
   addTask() {
     if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') return;
 
-
     //IMPORANTE ESPECIFICAR EL UNDEFIND Y EL NULL 
     const dueDate: Date | null = this.selectedDueDate ? new Date(this.selectedDueDate) : null;
 
@@ -65,4 +64,18 @@ export class TasksPage implements OnInit {
   logout() {
     this.authService.logout();
   }
+
+  onStatusChange(task: Task, checked: boolean) {
+    // Decide el nuevo status en función de si está marcado o no
+    const newStatus: 'Todo' | 'Completed' = checked ? 'Completed' : 'Todo';
+  
+    // Llama al servicio para actualizar el status en el backend
+    this.taskService
+      .updateTaskStatus(task._id!, newStatus)
+      .subscribe(updatedTask => {
+        // Refresca el task local con el status devuelto
+        task.status = updatedTask.status;
+      }, err => console.error(err));
+  }
+
 }

@@ -26,9 +26,9 @@ export class AuthService {
           this.authState.next(true);
           localStorage.setItem('role', response.role)
           console.log('role');
-       
           localStorage.setItem('username', response.username); 
           this.authState.next(true);
+          console.log('Username guardado en localStorage:', response.username); // Esto te ayudará a saber si lo guarda
         })
       );
   }

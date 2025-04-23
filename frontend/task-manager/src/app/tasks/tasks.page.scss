@@ -30,22 +30,21 @@ ion-datetime {
   margin-left: 25px;
 }
 
-/* Columna izquierda (Nueva tarea y Departamento) */
+
 .left-column {
   flex: 1; /* Hace que ocupe el mismo espacio disponible */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 15px; /* Separación entre los elementos */
+  gap: 15px; 
 }
 
-/* Columna derecha (Fecha límite de entrega) */
 .right-column {
   flex: 1; /* Hace que ocupe el mismo espacio disponible */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 5px; /* Separación entre los elementos */
+  gap: 15px; /* Separación entre los elementos */
 }
 
 /* Ajustes para ion-item (General) */
@@ -69,7 +68,7 @@ ion-datetime {
   font-size: 16px;
   padding: 15px;
   width: auto;
-  margin-left: 45%;
+  margin-left: 40%;
 }
 
 .add-btn:hover {
@@ -96,12 +95,16 @@ ion-card {
   background: #edd6d3;
   margin: 10px;
   border: 1px solid #e0e0e0;
+  height: 200px;
+  width: 300px;
 }
 
 ion-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
+
+
 
 ion-card-title {
   font-size: 18px;

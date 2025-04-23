@@ -43,6 +43,11 @@ export class TaskService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     return this.http.post<Task>(this.apiUrl, { title, department,status, dueDate},{headers}); 
   }
+    // Refactorizo para agregar el departamento  y el status y la fecha y poner el DAte
+  addTaskAdmin(title: string, department: string, status: string = 'Todo', dueDate:Date|null, username: string): Observable<Task> {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+      return this.http.post<Task>(this.apiUrl, { title, department,status, dueDate, username},{headers}); 
+  }
   toggleTask(id: string): Observable<Task> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`); //lo añadi
     return this.http.put<Task>(`${this.apiUrl}/tasks/${id}/status`, {headers});

@@ -17,11 +17,38 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-input [(ngModel)]="newTaskTitle" placeholder="Nueva tarea"></ion-input>
-    <ion-button (click)="addTask()" class="add-btn">Añadir</ion-button>
-  </ion-item> 
-    
+  <div class="form-container">
+    <div class="left-column">
+      <ion-item class="task-item">
+        <ion-input [(ngModel)]="newTaskTitle" placeholder="Nueva tarea"></ion-input>
+      </ion-item>
+        <ion-item class="department-item">
+          <ion-label>Departamento</ion-label>
+          <ion-select [(ngModel)]="selectedDepartment" interface="popover" placeholder="Selecciona un departamento" >
+            <ion-select-option value="Datos & IOT">Datos & IOT</ion-select-option>
+            <ion-select-option value="Desarrollo Fullstack">Desarrollo Fullstack</ion-select-option>
+            <ion-select-option value="Marketing">Marketing</ion-select-option>
+            <ion-select-option value="Diseño Web">Diseño Web</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="user-item">
+          <ion-label>Asignar tarea</ion-label>
+          <ion-select [(ngModel)]="selectedUser" interface="popover" placeholder="Asignar responsable" >
+            <ion-select-option *ngFor="let user of users" [value]="user._id">
+              {{ user.username }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <div class="right-column">
+        <ion-item class="date-item">
+          <ion-label  class="fecha-label">Fecha límite de entrega</ion-label>
+          <ion-datetime [(ngModel)]="selectedDueDate" display-format="DD/MM/YYYY" presentation="date"></ion-datetime>
+        </ion-item>
+        <ion-button (click)="addTask()" class="add-btn" expand="full">Añadir Tarea</ion-button>
+    </div>
+  </div>
+
     <!-- Añadimos el ion-grid para organizar las tareas en una cuadrícula -->
     <div style="display: flex; justify-content: center;">
         <!-- Usamos ngFor para crear un ion-col para cada tarea, asegurando que haya 4 columnas por fila -->

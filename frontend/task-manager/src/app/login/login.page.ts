@@ -14,6 +14,7 @@ export class LoginPage {
   constructor(private authService: AuthService, private router: Router) {}
   
 
+  //Aqui meto los roles dependiendo de cuantos vata a tener
   login() {
     this.authService.login(this.username, this.password).subscribe({
       next: (response: any) => {

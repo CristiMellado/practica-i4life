@@ -2,6 +2,19 @@ const express = require("express");
 const router = express.Router();
 const Task = require("../models/Task");
 const authMiddleware = require("../middleware/auth.middleware");
+//añadir aqui el user
+const User = require("../models/user.model");
+
+
+//Obtener todos los usuarios (solo el _id y username)
+router.get('/users', async (req, res) => {
+  try {
+    const users = await User.find({}, '_id username'); // seleccionamos solo lo necesario
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener usuarios" });
+  }
+}); 
 
 // Obtener todas las tareas
 router.get("/tasks", async (req, res) => {
@@ -25,7 +38,8 @@ router.get('/', authMiddleware,async (req, res) => {
 // Refactorización  de mi post cuando recibe el departamento
 router.post('/', authMiddleware, async (req, res) => {
   try {
-    const { title, department,status, dueDate } = req.body; // Recibimos el título y el departamento desde el cuerpo de la solicitud
+    //agregamos ahora el userId 
+    const { title, department,status, dueDate, userId } = req.body; // Recibimos el título y el departamento desde el cuerpo de la solicitud
     
     if (!title) {
       return res.status(400).json({ error: "El título es obligatorio" });
@@ -41,13 +55,23 @@ router.post('/', authMiddleware, async (req, res) => {
       return res.status(400).json({ error: "Fecha de vencimiento inválida" });
     }
 
+    // Si no viene userId, usamos el del auth (por defecto)
+    const assignedUserId = userId || req.userId; 
+
+    // Verificamos que el userId exista en la base de datos
+    const userExists = await User.findById(assignedUserId);
+    if (!userExists) {
+      return res.status(404).json({ error: "El usuario asignado no existe" });
+    }
+
 
 
     // Creamos la nueva tarea con los datos recibidos
     const task = new Task({
       title,
       completed: false, 
-      userId: req.userId, 
+     // userId: req.userId, //objeto Id para usar el username
+      userId: assignedUserId,
       department, // Incluimos el departamento si fue enviado
       status: status || 'Todo',
       dueDate: dueDate || null, //añadimos la fecha

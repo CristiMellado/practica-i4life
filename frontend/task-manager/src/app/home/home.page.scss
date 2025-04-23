@@ -53,26 +53,28 @@ ion-title{
 }
 
 //fondo 
-ion-content{
+/*ion-content{
   --background: #6bc0bb;
-}
+}*/
 
 //estilos al botón
-ion-button.add-btn {
+/* Estilo para el botón */
+.add-btn {
+  margin-top: 5px; /* Separación para el botón */
   --background: #947078;
-  color:white;
+  color: white;
   font-weight: bold;
-  font-size:16px;
+  font-size: 16px;
   padding: 15px;
-  width: 10%;
-  --border-radius: 15px;
+  width: auto;
+  margin-left: 20%;
+}
 
-  &:hover{
-    --background:#7A5E51;
-    color: wheat;
-    transform: scale(1.05);
-    transition: all 0.3s ease;
-  }
+.add-btn:hover {
+  --background: #7A5E51;
+  color: black;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
 }
 
 ion-button.close-btn {
@@ -136,4 +138,30 @@ ion-card {
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   margin: 10px;
   border: 1px solid #e0e0e0;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between; /* Espacio entre las columnas */
+  gap: 20px; /* Espaciado entre las columnas */
+  flex-wrap: wrap; /* Asegura que el contenido se ajuste bien en pantallas pequeñas */
+  margin-top: 20px;
+  margin-left: 25px;
+}
+
+
+.left-column {
+  flex: 1; /* Hace que ocupe el mismo espacio disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 15px; 
+}
+
+.right-column {
+  flex: 1; /* Hace que ocupe el mismo espacio disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 15px; /* Separación entre los elementos */
 }
