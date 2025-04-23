@@ -39,7 +39,7 @@ router.get('/', authMiddleware,async (req, res) => {
 router.post('/', authMiddleware, async (req, res) => {
   try {
     //agregamos ahora el userId 
-    const { title, department,status, dueDate, userId } = req.body; // Recibimos el título y el departamento desde el cuerpo de la solicitud
+    const { title, department,status, dueDate, userId, description } = req.body; // Recibimos el título y el departamento desde el cuerpo de la solicitud
     
     if (!title) {
       return res.status(400).json({ error: "El título es obligatorio" });
@@ -75,6 +75,8 @@ router.post('/', authMiddleware, async (req, res) => {
       department, // Incluimos el departamento si fue enviado
       status: status || 'Todo',
       dueDate: dueDate || null, //añadimos la fecha
+      description,
+      
     });
     
     // Guardamos la tarea en la base de datos

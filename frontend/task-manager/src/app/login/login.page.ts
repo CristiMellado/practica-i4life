@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class LoginPage {
   username = '';
   password = '';
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router,  private alertController: AlertController) {}
   
 
   //Aqui meto los roles dependiendo de cuantos vata a tener
@@ -38,6 +39,7 @@ export class LoginPage {
       },
       error:(error: any) => {
         console.error(error)
+        this.presentLoginErrorAlert(); 
       }
     })
   }
@@ -45,4 +47,15 @@ export class LoginPage {
   goToRegister() {
     this.router.navigate(['/register']);
   }
+
+    // Función para mostrar la alerta de error
+    async presentLoginErrorAlert() {
+      const alert = await this.alertController.create({
+        header: 'Error de inicio de sesión',
+        message: 'Usuario o contraseña incorrectos.',
+        buttons: ['Aceptar']
+      });
+  
+      await alert.present();
+    }
 }

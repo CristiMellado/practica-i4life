@@ -5,6 +5,14 @@
   align-items: center;          
 }
 
+h1{
+  text-align: center;
+}
+
+h2{
+  text-align: center;
+}
+
 .image-container {
   margin-top: 10px;
   margin-right: 10px;          
@@ -66,8 +74,9 @@ ion-title{
   font-weight: bold;
   font-size: 16px;
   padding: 15px;
-  width: auto;
+  width: 200px;
   margin-left: 20%;
+  margin: 0 auto;
 }
 
 .add-btn:hover {

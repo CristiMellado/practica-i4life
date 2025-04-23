@@ -60,6 +60,7 @@
                 <p *ngIf="task.dueDate">
                   Fecha límite: {{ task.dueDate | date: 'shortDate' }}
                 </p>
+                <p>Descripción: {{task.description}}</p>
                 <ion-item lines="none">
                   <ion-checkbox
                     slot="start"

@@ -15,12 +15,12 @@
     </div>
   </ion-toolbar>
 </ion-header>
-
 <ion-content class="ion-padding">
   <div class="form-container">
     <div class="left-column">
       <ion-item class="task-item">
-        <ion-input [(ngModel)]="newTaskTitle" placeholder="Nueva tarea"></ion-input>
+        <ion-label position="floating">Nueva Tarea</ion-label>
+        <ion-input [(ngModel)]="newTaskTitle" ></ion-input>
       </ion-item>
         <ion-item class="department-item">
           <ion-label>Departamento</ion-label>
@@ -31,6 +31,7 @@
             <ion-select-option value="Diseño Web">Diseño Web</ion-select-option>
           </ion-select>
         </ion-item>
+
         <ion-item class="user-item">
           <ion-label>Asignar tarea</ion-label>
           <ion-select [(ngModel)]="selectedUser" interface="popover" placeholder="Asignar responsable" >
@@ -39,13 +40,19 @@
     </ion-select-option>
           </ion-select>
         </ion-item>
+
+        <ion-item class="description-item">
+          <ion-label position="floating">Descripción</ion-label>
+          <ion-textarea [(ngModel)]="newTaskDescription" placeholder="Ingresa una descripción para la tarea" rows="4"></ion-textarea>
+        </ion-item>
+
       </div>
       <div class="right-column">
         <ion-item class="date-item">
           <ion-label  class="fecha-label">Fecha límite de entrega</ion-label>
           <ion-datetime [(ngModel)]="selectedDueDate" display-format="DD/MM/YYYY" presentation="date"></ion-datetime>
         </ion-item>
-        <ion-button (click)="addTask()" class="add-btn" expand="full">Añadir Tarea</ion-button>
+        <ion-button (click)="addTask()" class="add-btn">Añadir Tarea</ion-button>
     </div>
   </div>
 
@@ -53,7 +60,7 @@
     <div style="display: flex; justify-content: center;">
         <!-- Usamos ngFor para crear un ion-col para cada tarea, asegurando que haya 4 columnas por fila -->
          <div style="width: 40%;">
-          <h2>Sin completar</h2>
+          <h2>Tareas Pendientes</h2>
            <div  *ngFor="let task of todoTasks">
              <ion-card
              [ngClass]="{
@@ -71,6 +78,7 @@
                  <p><strong>Departamento: </strong>{{ task.department }}</p>
                  <p><strong>Creada el: </strong> {{ task.createdAt| date:'shortDate' }}</p>
                  <p><strong>Fecha límite: </strong>{{task.dueDate | date: 'shortDate'}}</p>
+                 <p><strong>Descripción: </strong>{{task.description}}</p>
                  <p><strong>Estado: </strong>{{ task.status }}</p>
      
                  <ion-checkbox
@@ -87,7 +95,7 @@
            </div>
          </div>
          <div style="width: 40%;">
-          <h2>Completadas</h2>
+          <h2>Tareas Completadas</h2>
            <div *ngFor="let task of completedTasks">
              <ion-card
              [ngClass]="{
@@ -105,6 +113,7 @@
                  <p><strong>Departamento: </strong>{{ task.department }}</p>
                  <p><strong>Creada el:</strong> {{ task.createdAt| date:'shortDate' }}</p>
                  <p><strong>Fecha límite: </strong>{{task.dueDate | date: 'shortDate'}}</p>
+                 <p><strong>Descripción: </strong>{{task.description}}</p>
                  <p><strong>Estado: </strong>{{ task.status }}</p>
      
                  <ion-checkbox

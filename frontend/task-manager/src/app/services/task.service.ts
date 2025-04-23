@@ -15,6 +15,7 @@ export interface Task {
     _id: string;
     username: string; //este es lo que saco del nombre
   };
+  description:string;
   
 
   //campo fecha
@@ -45,9 +46,9 @@ export class TaskService {
     return this.http.post<Task>(this.apiUrl, { title, department,status, dueDate},{headers}); 
   }
     // Refactorizo para agregar el departamento  y el status y la fecha y poner el DAte
-  addTaskAdmin(title: string, department: string, status: string = 'Todo', dueDate:Date|null, username: string): Observable<Task> {
+  addTaskAdmin(title: string, department: string, status: string = 'Todo', dueDate:Date|null, username: string, description:string): Observable<Task> {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-      return this.http.post<Task>(this.apiUrl, { title, department,status, dueDate, userId:username},{headers}); //aqui paso del userId el username
+      return this.http.post<Task>(this.apiUrl, { title, department,status, dueDate, userId:username, description},{headers}); //aqui paso del userId el username
   }
   toggleTask(id: string): Observable<Task> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`); //lo añadi

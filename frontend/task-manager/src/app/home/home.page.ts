@@ -18,8 +18,10 @@ export class HomePage implements OnInit {
   status: string = 'Todo';
   selectedDueDate:string = '';
   selectedUser:string = '';
-  
+
   users: { _id: string, username: string }[] = []; // Tipo correcto para los usuarios
+
+  newTaskDescription: string = ''; //Variable para la descripción
 
   constructor(
     private taskService: TaskService,
@@ -45,7 +47,7 @@ export class HomePage implements OnInit {
 
     console.log('este es el usuario',this.selectedUser);
     
-    this.taskService.addTaskAdmin(this.newTaskTitle, this.selectedDepartment, this.status, dueDate as Date | null, this.selectedUser).subscribe({
+    this.taskService.addTaskAdmin(this.newTaskTitle, this.selectedDepartment, this.status, dueDate as Date | null, this.selectedUser, this.newTaskDescription).subscribe({
       next: serverResponse=> {
         this.tasks.push(serverResponse);
         this.newTaskTitle = '';
@@ -53,6 +55,7 @@ export class HomePage implements OnInit {
         this.status = 'Todo'; //aqui añadimos tambien el status
         this.selectedDueDate = '';
         this.selectedUser = '';
+        this.newTaskDescription=''; //añado la descripcion
       },
       error: serverError=> {
         console.error(serverError)

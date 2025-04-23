@@ -22,6 +22,8 @@ department: {
     type: Date,
     required: false 
   },
+  //añado el campo descripcion 
+  description: { type: String, required: false },
 
 
 /*con timestamps, agrga createAt y updateAt a cada documento útil 
