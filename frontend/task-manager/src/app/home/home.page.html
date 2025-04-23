@@ -34,7 +34,7 @@
         <ion-item class="user-item">
           <ion-label>Asignar tarea</ion-label>
           <ion-select [(ngModel)]="selectedUser" interface="popover" placeholder="Asignar responsable" >
-                <ion-select-option *ngFor="let user of users" [value]="user.username">
+                <ion-select-option *ngFor="let user of users" [value]="user">
       {{ user.username }}
     </ion-select-option>
           </ion-select>
@@ -70,7 +70,6 @@
                  <p><strong>Responsable: </strong> {{ task.userId?.username }}</p>
                  <p><strong>Departamento: </strong>{{ task.department }}</p>
                  <p><strong>Creada el: </strong> {{ task.createdAt| date:'shortDate' }}</p>
-                 <p><strong>Última modificación:</strong> {{ task.updatedAt | date:'shortDate' }}</p>
                  <p><strong>Fecha límite: </strong>{{task.dueDate | date: 'shortDate'}}</p>
                  <p><strong>Estado: </strong>{{ task.status }}</p>
      
@@ -105,7 +104,6 @@
                  <p><strong>Responsable: </strong> {{ task.userId?.username }}</p>
                  <p><strong>Departamento: </strong>{{ task.department }}</p>
                  <p><strong>Creada el:</strong> {{ task.createdAt| date:'shortDate' }}</p>
-                 <p><strong>Última modificación:</strong> {{ task.updatedAt | date:'shortDate' }}</p>
                  <p><strong>Fecha límite: </strong>{{task.dueDate | date: 'shortDate'}}</p>
                  <p><strong>Estado: </strong>{{ task.status }}</p>
      

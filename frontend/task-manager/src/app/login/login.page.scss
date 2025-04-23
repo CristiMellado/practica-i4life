@@ -1,32 +1,36 @@
-//estilos al toolbar
-ion-toolbar{
-    --background: #34a1b5;
-    text-align: center;
-    color: white;
-    text-transform: uppercase;
+ion-toolbar {
+  --background: #34a1b5;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
 }
 
-.image-container {
-    display: flex;           
-    justify-content: center; 
-    align-items: center;     
-    height: 120px;           
-    margin-bottom: 20px;     
-    margin-top: 10px;
-  }
-  
-  .login-image {
-    max-width: 80%;   
-    height: auto;     
-  }
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-image {
+  width: 100px;
+  height: auto;
+  margin: 20px 0;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
 .centered-button {
-    --background:#947078;
-    width: 70%;          /* Ancho del botón, ajusta este porcentaje */
-    max-width: 300px;    /* Opcional, para limitar el tamaño máximo */
-    margin: 0 auto;      /* Centra el botón horizontalmente */
-    display: flex;
-    justify-content: center; /* Centra el contenido dentro del botón */
-    align-items: center;     /* Centra el texto dentro del botón */
-    padding: 10px;      /* Añadir un poco de espacio dentro del botón */
-  }
+  --background: #947078;
+}

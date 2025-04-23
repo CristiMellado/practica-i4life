@@ -70,8 +70,8 @@ router.post('/', authMiddleware, async (req, res) => {
     const task = new Task({
       title,
       completed: false, 
-      userId: req.userId, //objeto Id para usar el username
-      //userId: assignedUserId,
+      //userId: req.userId, //objeto Id para usar el username
+      userId: assignedUserId,
       department, // Incluimos el departamento si fue enviado
       status: status || 'Todo',
       dueDate: dueDate || null, //añadimos la fecha
@@ -117,25 +117,3 @@ module.exports = router;
 
 
 
-
-/*  Agregar una nueva tarea
-router.post("/tasks", authMiddleware ,async (req, res) => { // comento para probar que no me falle más
-  try {
-    const { title } = req.body;
-    if (!title)
-      return res.status(400).json({ error: "El título es obligatorio" });
-    const newTask = new Task({ title });
-    await newTask.save();
-    res.json(newTask);
-  } catch (error) {
-    res.status(500).json({ error: "Error al crear la tarea" });
-  }
-});*/
-
-//antiguo
-/*router.post('/', authMiddleware, async (req, res) => {
-    const { title} = req.body;
-    const task = new Task({ title, completed: false, userId: req.userId });
-    await task.save();
-    res.status(201).json(task);
-    }); */

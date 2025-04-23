@@ -13,8 +13,9 @@ export interface Task {
   status?: 'Todo' | 'In Progress' | 'Completed'; //añado el campo status para saber en cual se encuentra
   userId?: {
     _id: string;
-    username: string;
+    username: string; //este es lo que saco del nombre
   };
+  
 
   //campo fecha
   dueDate?: Date;
@@ -46,7 +47,7 @@ export class TaskService {
     // Refactorizo para agregar el departamento  y el status y la fecha y poner el DAte
   addTaskAdmin(title: string, department: string, status: string = 'Todo', dueDate:Date|null, username: string): Observable<Task> {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-      return this.http.post<Task>(this.apiUrl, { title, department,status, dueDate, username},{headers}); 
+      return this.http.post<Task>(this.apiUrl, { title, department,status, dueDate, userId:username},{headers}); //aqui paso del userId el username
   }
   toggleTask(id: string): Observable<Task> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`); //lo añadi

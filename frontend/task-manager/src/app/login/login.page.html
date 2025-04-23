@@ -3,48 +3,52 @@
     <ion-title>Iniciar Sesión</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content class="ion-padding">
 
-  <div class="image-container">
+  <div class="login-container">
     <img src="assets/icon/iniciar_sesion.png" alt="Iniciar Sesión" class="login-image">
+
+    <ion-card class="login-card">
+      <ion-card-content>
+        <form #form="ngForm" (ngSubmit)="login()" class="login-form">
+
+          <ion-item>
+            <ion-label position="floating">Usuario</ion-label>
+            <ion-input
+              name="username"
+              required
+              [(ngModel)]="username"
+            ></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="form.submitted && !username">
+            El usuario es requerido
+          </ion-text>
+
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input
+              name="password"
+              required
+              type="password"
+              [(ngModel)]="password"
+            ></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="form.submitted && !password">
+            La contraseña es requerida
+          </ion-text>
+
+          <ion-button expand="block" type="submit" class="centered-button">
+            Ingresar
+          </ion-button>
+
+          <ion-button expand="block"  (click)="goToRegister()" class="centered-button">
+            Regístrate
+          </ion-button>
+
+        </form>
+      </ion-card-content>
+    </ion-card>
   </div>
 
-  <ion-content>
-    <form #form="ngForm" (ngSubmit)="login()">
-      <ion-item>
-        <ion-input
-          name="username"
-          required
-          [(ngModel)]="username"
-          placeholder="Usuario"
-        ></ion-input>
-      </ion-item>
-      <ion-text color="danger" *ngIf="form.submitted && !username">
-        El usuario es requerido
-      </ion-text>
-  
-      <ion-item>
-        <ion-input
-          name="password"
-          required
-          type="password"
-          [(ngModel)]="password"
-          placeholder="Contraseña"
-        ></ion-input>
-      </ion-item>
-      <ion-text color="danger" *ngIf="form.submitted && !password">
-        La contraseña es requerida
-      </ion-text>
-  
-      <ion-button expand="inset" class="centered-button" type="submit">
-        Ingresar
-      </ion-button>
-    </form>
-  
-    <ion-button expand="inset" class="centered-button" (click)="goToRegister()">
-      Regístrate
-    </ion-button>
-  </ion-content>
-  
-
-
+</ion-content>
