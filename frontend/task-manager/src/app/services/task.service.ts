@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+
+//Mi servicio de Treas
 export interface Task {
   _id?: string;
   title: string;
   completed: boolean;
-  //aqui añado las variables create y update para acceder a ellas
   createdAt : string;
   updatedAt: string;
   department?: string, //añado el nuevo campo de mi capa modelo
@@ -15,9 +16,7 @@ export interface Task {
     _id: string;
     username: string; //este es lo que saco del nombre
   };
-  description:string;
-  
-
+  description:string;  
   //campo fecha
   dueDate?: Date;
 }
@@ -28,6 +27,7 @@ export class TaskService {
   private apiUrl = environment.apiUrl; 
 
   constructor(private http: HttpClient) {}
+
 
   //método para obtener todas las tareas
   getAllTasks(): Observable <Task[]>{
@@ -40,20 +40,34 @@ export class TaskService {
     return this.http.get<Task[]>(this.apiUrl, { headers });
     }
 
-  // Refactorizo para agregar el departamento  y el status y la fecha y poner el DAte
-  addTask(title: string, department: string, status: string = 'Todo', dueDate:Date|null, description:string): Observable<Task> {
+  // método añadir tarea que utilizo en tasks.page.ts (user)
+  addTask(title: string, 
+         department: string, 
+         status: string = 'Todo', 
+         dueDate:Date|null, 
+         description:string): Observable<Task> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     return this.http.post<Task>(this.apiUrl, { title, department,status, dueDate,description},{headers}); 
   }
-    // Refactorizo para agregar el departamento  y el status y la fecha y poner el DAte
-  addTaskAdmin(title: string, department: string, status: string = 'Todo', dueDate:Date|null, username: string, description:string): Observable<Task> {
+  
+  // método añadir tarea que utilizo en home.page.ts (admin)
+  addTaskAdmin(title: string, 
+              department: string, 
+              status: string = 'Todo', 
+              dueDate:Date|null, 
+              username: string, 
+              description:string): Observable<Task> {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
       return this.http.post<Task>(this.apiUrl, { title, department,status, dueDate, userId:username, description},{headers}); //aqui paso del userId el username
   }
+
+  //metodo actualizar tarea
   toggleTask(id: string): Observable<Task> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`); //lo añadi
     return this.http.put<Task>(`${this.apiUrl}/tasks/${id}/status`, {headers});
   }
+
+  //método eliminar tarea
   deleteTask(id: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`); //lo añadi
     return this.http.delete(`${this.apiUrl}/tasks/${id}`, {headers});

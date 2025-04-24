@@ -76,9 +76,11 @@ export class TasksPage implements OnInit {
     await alert.present();
   }
 
+  /*Ahora no lo estoy utilizando
   toggleTask(task: any) {
     this.taskService.toggleTask(task._id).subscribe();
-  }
+  }*/
+
   deleteTask(task: Task) { //paso la ruta correcta antes recibia el id, ahora tengo que pasarle el objeto
     this.taskService.deleteTask(task._id!).subscribe(() => {  //accedo en mi objeto a su atributo id
       this.tasks = this.tasks.filter((t) => t._id !== task._id);
