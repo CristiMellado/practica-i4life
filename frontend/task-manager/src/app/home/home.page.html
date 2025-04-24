@@ -8,11 +8,8 @@
       <ion-title class="tarea">Gestor de Tareas</ion-title>
       <div class="username-container">
         <ion-icon name="person"></ion-icon>
-        <ion-text>
-          Hola, {{ username }}
-        </ion-text>
+        <ion-text>¡Hola, {{ username }}!</ion-text>
       </div>
-      
        <ion-searchbar [(ngModel)]="searchTerm" (ngModelChange)="filterTasks()" placeholder="Buscar" class="custom-searchbar" color="secondary"></ion-searchbar>
     </div>
   </ion-toolbar>
@@ -49,12 +46,13 @@
       <ion-item class="description-item">
         <ion-label position="floating">Descripción</ion-label>
         <ion-textarea style="height: 121px;" [(ngModel)]="newTaskDescription" placeholder="Ingresa una descripción para la tarea"></ion-textarea>
-        </ion-item>
-        
-      </div>
+        </ion-item> 
+      </div> <!--Acaba div de lado izquierdo-->
+
       <div class="right-column">
         <ion-item class="date-item">
           <ion-label  class="fecha-label">Fecha límite de entrega</ion-label>
+          <!--En presentation escogi que solo ese muestre la fecha pero tiene más opciones-->
           <ion-datetime [(ngModel)]="selectedDueDate" display-format="DD/MM/YYYY" presentation="date" ></ion-datetime>
         </ion-item>
         <ion-button (click)="addTask()" class="add-btn">Añadir Tarea</ion-button>
@@ -78,7 +76,7 @@
               'card-marketing' : task.department === 'Marketing',
               'card-diseno-web': task.department === 'Diseño Web'
             }"
-          >
+            > <!--Etiqueta del card-->
               <ion-card-header>
                 <div style="display: flex; justify-content: space-between; align-items: start;">
                   <ion-card-title>{{ task.title }}</ion-card-title>
@@ -98,8 +96,8 @@
                 <ion-toggle
                   slot="start"
                   [(ngModel)]="task.completed"
-                  (ionChange)="onStatusChange(task, $event.detail.checked)"
-                >Completar</ion-toggle>
+                  (ionChange)="onStatusChange(task, $event.detail.checked)">Completar
+                </ion-toggle>
               </ion-card-content>
             </ion-card>
            </div> <!--Acaba el for de las tareas pendientes-->

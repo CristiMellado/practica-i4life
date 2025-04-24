@@ -1,21 +1,5 @@
-//estilos a toolbar
-.header-content {
-  display: flex;                
-  align-items: center;          
-}
-
 h2{
   text-align: center;
-}
-
-.image-container {
-  margin-top: 10px;
-  margin-right: 10px;          
-}
-
-.gestor {
-  max-width: 60px;             
-  height: auto;
 }
 
 .toolbar-content {
@@ -46,15 +30,6 @@ ion-title{
   margin-top: 15px;
 }
 
-#container {
-  text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 //fondo 
 /*ion-content{
   --background: #6bc0bb;
@@ -63,35 +38,26 @@ ion-title{
 //estilos al botón
 /* Estilo para el botón */
 .add-btn {
-  margin-top: 5px; /* Separación para el botón */
-  --background: #947078;
-  color: white;
+  margin: 5px auto 0 auto;
+  --background: #84baa1;
+  color: black;
   font-weight: bold;
-  font-size: 16px;
-  padding: 15px;
-  width: 200px;
-  margin-left: 20%;
-  margin: 0 auto;
+  font-size: 15px;
+  padding: 25px;
+  width: 250px;
+  --border-radius: 25px;
+  --padding-start: 10px; /* Ajusta los padding de los bordes si es necesario */
+  --padding-end: 10px;   /* Ajusta el padding de los bordes */
+  --padding-top: 10px;
+  --padding-bottom: 10px;
 }
 
+
 .add-btn:hover {
-  --background: #7A5E51;
+  --background:#558325;
   color: black;
   transform: scale(1.05);
   transition: all 0.3s ease;
-}
-
-ion-button.close-btn {
-  border-radius: 15px;   
-  padding: 3px;      
-  margin-top: 10px;
-
-  &:hover{
-    --background:#7A5E51;
-    color: wheat;
-    transform: scale(1.05);
-    transition: all 0.3s ease;
-  }
 }
 
 ion-content {
@@ -116,15 +82,6 @@ ion-content {
 
   margin: 0;
 }
-
-#container a {
-  text-decoration: none;
-}
-
-.completed {
-  text-decoration: line-through;
-  color: gray;
-  }
 
 .card-iot           { --background: #e0f7fa; }
 .card-fullstack     { --background: #e8f5e9; }

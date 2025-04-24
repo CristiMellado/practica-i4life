@@ -61,18 +61,22 @@ ion-datetime {
 
 /* Estilo para el botón */
 .add-btn {
-  margin-top: 5px; /* Separación para el botón */
-  --background: #947078;
-  color: white;
+  margin: 5px auto 0 auto;
+  --background: #84baa1;
+  color: black;
   font-weight: bold;
-  font-size: 16px;
-  padding: 15px;
-  width: auto;
-  margin-left: 40%;
+  font-size: 15px;
+  padding: 25px;
+  width: 300px;
+  --border-radius: 25px;
+  --padding-start: 10px; /* Ajusta los padding de los bordes si es necesario */
+  --padding-end: 10px;   /* Ajusta el padding de los bordes */
+  --padding-top: 10px;
+  --padding-bottom: 10px;
 }
 
 .add-btn:hover {
-  --background: #7A5E51;
+  --background:#558325;
   color: black;
   transform: scale(1.05);
   transition: all 0.3s ease;

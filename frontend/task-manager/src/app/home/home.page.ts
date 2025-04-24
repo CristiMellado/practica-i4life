@@ -21,8 +21,7 @@ export class HomePage implements OnInit {
   selectedUser:string = '';
   users: { _id: string, username: string }[] = []; // Tipo correcto para los usuarios
   newTaskDescription: string = ''; //Variable para la descripción
-
-  searchTerm: string = ''; //variable para encontrar 
+  searchTerm: string = ''; //variable para encontrar el nombre del usuario
   filteredTodoTasks: Task[] = [];
   filteredCompletedTasks: Task[] = [];
 
@@ -34,7 +33,7 @@ export class HomePage implements OnInit {
     ) {}
 
   ngOnInit() {
-    this.username = localStorage.getItem('username') || '';
+    this.username = localStorage.getItem('username') || '';  //aquí me guarda el nombre del usuario
     console.log('Username cargado en HomePage:', this.username)
     this.loadTasks();
     this.loadUsers(); //cargo los usuarios 
@@ -42,11 +41,13 @@ export class HomePage implements OnInit {
   loadTasks() {
     this.taskService.getAllTasks().subscribe((tasks) => {
       this.tasks = tasks;
-      // Inicializamos las listas filtradas con todas las tareas al cargar
+      // Cargamos todas las tareas
       this.filteredTodoTasks = this.todoTasks;
       this.filteredCompletedTasks = this.completedTasks;
     });
   }
+
+//método añadir tarea
   addTask() {
     console.log("addTask");
     if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') {
@@ -89,15 +90,18 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
+  /* Ahora no lo estoy utilizando
   toggleTask(task: Task) {
     this.taskService.toggleTask(task._id!).subscribe((updatedTask) => {
       task.completed = updatedTask.completed;
     });
-  }
+  }*/
+
   deleteTask(task: Task) {
     console.log('Tarea que se quiere eliminar:', task);
     this.taskService.deleteTask(task._id!).subscribe(() => {
       this.tasks = this.tasks.filter((t) => t._id !== task._id);
+      this.filterTasks(); //aplica el filtro para actualizar la vista 
     });
   }
   
@@ -105,6 +109,7 @@ export class HomePage implements OnInit {
     this.authService.logout();
   }
 
+  //método para cambiar el status
   onStatusChange(task: Task, checked: boolean) {
     // Decide el nuevo status en función de si está marcado o no
     const newStatus: 'Todo' | 'Completed' = checked ? 'Completed' : 'Todo';
@@ -115,6 +120,8 @@ export class HomePage implements OnInit {
       .subscribe(updatedTask => {
         // Refresca el task local con el status devuelto
         task.status = updatedTask.status;
+        
+        this.filterTasks(); //aplica el filtro para actualizar la vista 
       }, err => console.error(err));
   }
 
@@ -135,26 +142,27 @@ export class HomePage implements OnInit {
   });
 }
 
-filterTasks() {
-  if (!this.searchTerm) {
-    // Si no hay término de búsqueda, mostrar todas las tareas
-    this.filteredTodoTasks = this.todoTasks;
-    this.filteredCompletedTasks = this.completedTasks;
-    return;
-  }
-  
-  const query = this.searchTerm.toLowerCase();
-  
-  // Filtra las tareas pendientes por nombre de usuario
-  this.filteredTodoTasks = this.todoTasks.filter(task => 
-    task.userId?.username.toLowerCase().includes(query)
-  );
-  
-  // Filtra las tareas completadas por nombre de usuario
-  this.filteredCompletedTasks = this.completedTasks.filter(task => 
-    task.userId?.username.toLowerCase().includes(query)
-    );
-  }
+  //método para filtrar las tareas
+  filterTasks() {
+    if (!this.searchTerm) {
+      // Si no escribo nada me va a mostrar todas las tareas
+      this.filteredTodoTasks = this.todoTasks;
+      this.filteredCompletedTasks = this.completedTasks;
+      return;
+    }
+    
+    const query = this.searchTerm.toLowerCase(); //me guarda el nombre que escribo en el buscador
+    
+    // Filtra las tareas pendientes por nombre de usuario
+    this.filteredTodoTasks = this.todoTasks.filter(task => 
+      task.userId?.username.toLowerCase().includes(query)
+    );
+    
+    // Filtra las tareas completadas por nombre de usuario
+    this.filteredCompletedTasks = this.completedTasks.filter(task => 
+      task.userId?.username.toLowerCase().includes(query)
+      );
+    }
   
 }
 
