@@ -22,7 +22,9 @@ export class HomePage implements OnInit {
   users: { _id: string, username: string }[] = []; // Tipo correcto para los usuarios
   newTaskDescription: string = ''; //Variable para la descripción
 
-
+  searchTerm: string = ''; //variable para encontrar 
+  filteredTodoTasks: Task[] = [];
+  filteredCompletedTasks: Task[] = [];
 
   constructor(
     private taskService: TaskService,
@@ -39,6 +41,7 @@ export class HomePage implements OnInit {
   }
   loadTasks() { //agregue aquí mi método para recibir todas las tareas
     this.taskService.getAllTasks().subscribe((tasks) => (this.tasks = tasks));
+    this.filterTasks(); //me cargue cuando filtro
   }
   
   addTask() {
@@ -64,6 +67,7 @@ export class HomePage implements OnInit {
         this.selectedUser = '';
         this.newTaskDescription=''; //añado la descripcion
         this.presentAlert('La tarea se ha registrado con éxito'); //pongo la alerta
+        this.filterTasks(); //aplicar el filtro necesario para que sea por nombre.
       },
       error: serverError=> {
         console.error(serverError)
@@ -127,6 +131,20 @@ export class HomePage implements OnInit {
     console.error("Error al cargar usuarios:", error);
   });
 }
+
+  // Método para filtrar las tareas por el nombre del usuario
+  filterTasks() {
+  
+    const query = this.searchTerm.toLowerCase();
+    
+    // Filtra las tareas pendientes por nombre de usuario
+    this.filteredTodoTasks = this.todoTasks.filter(
+      task => task.userId?.username.toLowerCase().includes(query));
+    console.log('Usuario en tarea:', this.username); 
+    // Filtra las tareas completadas por nombre de usuario
+    this.filteredCompletedTasks = this.completedTasks.filter(
+      task => task.userId?.username.toLowerCase().includes(query));
+  }
   
 }
 

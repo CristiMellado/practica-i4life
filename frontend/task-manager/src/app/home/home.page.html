@@ -13,7 +13,7 @@
         </ion-text>
       </div>
       
-      <ion-searchbar placeholder="Buscar" class="custom-searchbar"></ion-searchbar>
+       <ion-searchbar [(ngModel)]="searchTerm" (ngModelChange)="filterTasks()" placeholder="Buscar" class="custom-searchbar"></ion-searchbar>
     </div>
   </ion-toolbar>
 </ion-header>
