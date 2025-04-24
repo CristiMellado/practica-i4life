@@ -185,3 +185,17 @@ ion-avatar {
   height: 20px;
 }
 
+.badge-label-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-searchbar {
+  margin-top: 10px;
+  width: 180px;  /* Ajusta el tamaño del searchbar */
+  --border-radius: 25px;
+}
+
+
+

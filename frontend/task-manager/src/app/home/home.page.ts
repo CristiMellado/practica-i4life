@@ -19,9 +19,7 @@ export class HomePage implements OnInit {
   status: string = 'Todo';
   selectedDueDate:string = '';
   selectedUser:string = '';
-
   users: { _id: string, username: string }[] = []; // Tipo correcto para los usuarios
-
   newTaskDescription: string = ''; //Variable para la descripción
 
 

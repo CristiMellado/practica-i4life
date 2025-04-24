@@ -41,9 +41,9 @@ export class TaskService {
     }
 
   // Refactorizo para agregar el departamento  y el status y la fecha y poner el DAte
-  addTask(title: string, department: string, status: string = 'Todo', dueDate:Date|null): Observable<Task> {
+  addTask(title: string, department: string, status: string = 'Todo', dueDate:Date|null, description:string): Observable<Task> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    return this.http.post<Task>(this.apiUrl, { title, department,status, dueDate},{headers}); 
+    return this.http.post<Task>(this.apiUrl, { title, department,status, dueDate,description},{headers}); 
   }
     // Refactorizo para agregar el departamento  y el status y la fecha y poner el DAte
   addTaskAdmin(title: string, department: string, status: string = 'Todo', dueDate:Date|null, username: string, description:string): Observable<Task> {
@@ -63,5 +63,7 @@ export class TaskService {
   updateTaskStatus(id: string, status: 'Todo'  | 'Completed'): Observable<Task> {
     return this.http.put<Task>(`${this.apiUrl}/tasks/${id}/status`, { status });
   }
+
+
 }
 
