@@ -13,7 +13,7 @@
         </ion-text>
       </div>
       
-       <ion-searchbar [(ngModel)]="searchTerm" (ngModelChange)="filterTasks()" placeholder="Buscar" class="custom-searchbar"></ion-searchbar>
+       <ion-searchbar [(ngModel)]="searchTerm" (ngModelChange)="filterTasks()" placeholder="Buscar" class="custom-searchbar" color="secondary"></ion-searchbar>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -67,10 +67,10 @@
           <ion-item>
             <div class="badge-label-container">
               <ion-label>Tareas Pendientes</ion-label>
-              <ion-badge color="warning">{{ todoTasks.length }}</ion-badge>
+              <ion-badge color="warning">{{ filteredTodoTasks.length }}</ion-badge>
             </div>
           </ion-item>
-           <div  *ngFor="let task of todoTasks">
+          <div *ngFor="let task of filteredTodoTasks">
             <ion-card
             [ngClass]="{
               'card-iot'       : task.department === 'Datos & IOT',
@@ -108,10 +108,10 @@
           <ion-item>
             <div class="badge-label-container">
               <ion-label>Tareas Completadas</ion-label>
-              <ion-badge color="success">{{ completedTasks.length }}</ion-badge>
+              <ion-badge color="success">{{ filteredCompletedTasks.length }}</ion-badge>
             </div>
           </ion-item>
-           <div *ngFor="let task of completedTasks">
+          <div *ngFor="let task of filteredCompletedTasks">
             <ion-card
             [ngClass]="{
               'card-iot'       : task.department === 'Datos & IOT',

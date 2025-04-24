@@ -40,8 +40,8 @@ export class HomePage implements OnInit {
     this.loadUsers(); //cargo los usuarios 
   }
   loadTasks() { //agregue aquí mi método para recibir todas las tareas
-    this.taskService.getAllTasks().subscribe((tasks) => (this.tasks = tasks));
     this.filterTasks(); //me cargue cuando filtro
+    this.taskService.getAllTasks().subscribe((tasks) => (this.tasks = tasks));
   }
   
   addTask() {
@@ -132,19 +132,26 @@ export class HomePage implements OnInit {
   });
 }
 
-  // Método para filtrar las tareas por el nombre del usuario
-  filterTasks() {
-  
-    const query = this.searchTerm.toLowerCase();
-    
-    // Filtra las tareas pendientes por nombre de usuario
-    this.filteredTodoTasks = this.todoTasks.filter(
-      task => task.userId?.username.toLowerCase().includes(query));
-    console.log('Usuario en tarea:', this.username); 
-    // Filtra las tareas completadas por nombre de usuario
-    this.filteredCompletedTasks = this.completedTasks.filter(
-      task => task.userId?.username.toLowerCase().includes(query));
+filterTasks() {
+  if (!this.searchTerm) {
+    // Si no hay término de búsqueda, mostrar todas las tareas
+    this.filteredTodoTasks = this.todoTasks;
+    this.filteredCompletedTasks = this.completedTasks;
+    return;
   }
+  
+  const query = this.searchTerm.toLowerCase();
+  
+  // Filtra las tareas pendientes por nombre de usuario
+  this.filteredTodoTasks = this.todoTasks.filter(task => 
+    task.userId?.username.toLowerCase().includes(query)
+  );
+  
+  // Filtra las tareas completadas por nombre de usuario
+  this.filteredCompletedTasks = this.completedTasks.filter(task => 
+    task.userId?.username.toLowerCase().includes(query)
+    );
+  }
   
 }
 
