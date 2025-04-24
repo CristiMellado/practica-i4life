@@ -39,11 +39,14 @@ export class HomePage implements OnInit {
     this.loadTasks();
     this.loadUsers(); //cargo los usuarios 
   }
-  loadTasks() { //agregue aquí mi método para recibir todas las tareas
-    this.filterTasks(); //me cargue cuando filtro
-    this.taskService.getAllTasks().subscribe((tasks) => (this.tasks = tasks));
-  }
-  
+  loadTasks() {
+    this.taskService.getAllTasks().subscribe((tasks) => {
+      this.tasks = tasks;
+      // Inicializamos las listas filtradas con todas las tareas al cargar
+      this.filteredTodoTasks = this.todoTasks;
+      this.filteredCompletedTasks = this.completedTasks;
+    });
+  }
   addTask() {
     console.log("addTask");
     if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') {
