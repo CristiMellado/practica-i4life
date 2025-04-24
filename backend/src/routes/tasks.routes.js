@@ -29,8 +29,9 @@ router.get("/tasks", async (req, res) => {
 
 //Obtener authMiddleware
 router.get('/', authMiddleware,async (req, res) => { 
-  console.log(req.userId)
-    const tasks = await Task.find({ userId: req.userId });
+  const user = await User.findById(req.userId)
+
+  const tasks = await Task.find(user.role === "admin" ? {} : { userId: req.userId });
     res.json(tasks);
 });
 

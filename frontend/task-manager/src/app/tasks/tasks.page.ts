@@ -23,6 +23,9 @@ export class TasksPage implements OnInit {
   status: string = 'Todo';
   selectedDueDate:string = ''; //almacenar fecha de vencimiento
   newTaskDescription: string = ''; //Variable para la descripción
+  today: string = new Date().toISOString(); //guarda la fecha en formato string
+  dueDate?: Date; ///añadirla
+
 
   constructor(
     private taskService: TaskService,

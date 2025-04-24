@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService, Task } from '../services/task.service';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service'; //importamos el servicio de useService
-import { AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular'; //imporamos el component de ionic para mostrar las alertas
 
 @Component({
   selector: 'app-home',
@@ -24,18 +24,19 @@ export class HomePage implements OnInit {
   searchTerm: string = ''; //variable para encontrar el nombre del usuario
   filteredTodoTasks: Task[] = [];
   filteredCompletedTasks: Task[] = [];
+  today: string = new Date().toISOString(); //guarda la fecha en formato string
 
   constructor(
     private taskService: TaskService,
-    private userService: UserService, //crear el servicio para usar el usuario, la !
+    private userService: UserService, //crear el servicio para obtener el usuario
     private authService: AuthService,
-    private alertController: AlertController
+    private alertController: AlertController //aquí inicializao mmi alerta
     ) {}
 
   ngOnInit() {
     this.username = localStorage.getItem('username') || '';  //aquí me guarda el nombre del usuario
     console.log('Username cargado en HomePage:', this.username)
-    this.loadTasks();
+    this.loadTasks(); //cargo las tareas
     this.loadUsers(); //cargo los usuarios 
   }
   loadTasks() {
@@ -50,15 +51,14 @@ export class HomePage implements OnInit {
 //método añadir tarea
   addTask() {
     console.log("addTask");
+    // Si alguno de los 2 campos está vacío, mostramos un alert
     if (this.newTaskTitle.trim() === '' || this.selectedDepartment.trim() === '') {
-      // Si algún campo está vacío, mostramos un alert
       this.presentAlert('Por favor, rellena todos los campos.');
       return;
     }
 
     //IMPORANTE ESPECIFICAR EL UNDEFIND Y EL NULL 
     const dueDate: Date | null = this.selectedDueDate ? new Date(this.selectedDueDate) : null;
-
     console.log('este es el usuario',this.selectedUser);
     
     this.taskService.addTaskAdmin(this.newTaskTitle, this.selectedDepartment, this.status, dueDate as Date | null, this.selectedUser, this.newTaskDescription).subscribe({
@@ -97,6 +97,7 @@ export class HomePage implements OnInit {
     });
   }*/
 
+  //método eliminar tarea  
   deleteTask(task: Task) {
     console.log('Tarea que se quiere eliminar:', task);
     this.taskService.deleteTask(task._id!).subscribe(() => {

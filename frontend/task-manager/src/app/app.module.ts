@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {  provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { FullCalendarModule } from '@fullcalendar/angular'; //añadi el fullcalendar
 
 
 @NgModule({
@@ -15,6 +16,7 @@ BrowserModule,
 IonicModule.forRoot(),
 AppRoutingModule,
 FormsModule,
+FullCalendarModule //añadir el calendario
 ],
 providers: [
     provideHttpClient(), // Agregamos el módulo HTTP

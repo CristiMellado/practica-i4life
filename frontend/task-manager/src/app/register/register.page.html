@@ -1,34 +1,53 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button autoHide="false"></ion-menu-button>
-    </ion-buttons>
-
     <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<div class="image-container">
-  <img src="assets/icon/registrar.png" alt="Registrar" class="registrar-image">
-</div>
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <img src="assets/icon/registrar.png" alt="Registrar" class="login-image" />
 
-<ion-content class="ion-padding content-centered">
-  <div class="form-container">
-    <div class="form-inner">
-      <ion-item>
-        <ion-label position="floating">Usuario</ion-label>
-        <ion-input [(ngModel)]="username"></ion-input>
-      </ion-item>
+    <ion-card class="login-card">
+      <ion-card-content>
+        <form #registerForm="ngForm" (ngSubmit)="register()" class="login-form">
 
-      <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input [(ngModel)]="password" type="password"></ion-input>
-      </ion-item>
+          <ion-item>
+            <ion-label position="floating">Usuario</ion-label>
+            <ion-input
+              name="username"
+              required
+              [(ngModel)]="username"
+            ></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="registerForm.submitted && !username">
+            El usuario es requerido
+          </ion-text>
 
-      <ion-button expand="block" shape="round" color="tertiary" (click)="register()">
-        Registrarse
-      </ion-button>
-    </div>
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input
+              name="password"
+              required
+              type="password"
+              [(ngModel)]="password"
+            ></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="registerForm.submitted && !password">
+            La contraseña es requerida
+          </ion-text>
+
+          <div class="button-container">
+            <ion-button expand="block" type="submit" class="centered-button" shape="round">
+              Registrar
+            </ion-button>
+            <ion-button routerLink="/login" expand="block" class="centered-button" shape="round">
+              Volver
+            </ion-button>
+          </div>
+
+        </form>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
-

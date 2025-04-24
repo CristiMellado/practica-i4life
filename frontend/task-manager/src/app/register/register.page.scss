@@ -5,37 +5,59 @@ ion-toolbar {
     text-transform: uppercase;
   }
 
-  .image-container {
-    display: flex;           
-    justify-content: center; 
-    align-items: center;     
-    height: 150px;           
-    margin-bottom: 20px;     
-    margin-top: 10px;
+
+  ion-toolbar {
+    --background: #34a1b5;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
   }
   
-  .registrar-image {
-    max-width: 70%;   
-    height: auto;     
-  }
-  
-  .content-centered {
+  .login-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100%;
+    padding: 20px;
   }
   
-  .form-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  .login-image {
+    width: 100px;
+    height: auto;
+    margin: 20px 0;
   }
   
-  .form-inner {
+  .login-card {
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     padding: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  /* Contenedor para los botones */
+  .button-container {
+    display: flex;
+    justify-content: center;  /* Centra los botones */
+    gap: 5px; /* Menos espacio entre los botones */
+    width: 100%;
+  }
+  
+  /* Estilos para los botones */
+  .centered-button {
+    --background: #947078;
+    --color: white;
+    width: 45%; /* Ancho menor para que se alineen bien */
+    max-width: 200px;
+    margin: 0;
+    border-radius: 12px;
+    text-transform: none;
+    font-weight: 500;
+  }
+  
+  
   
   

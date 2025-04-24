@@ -43,7 +43,7 @@
 
       <ion-item class="date-item">
         <ion-label class="fecha-label">Fecha límite de entrega</ion-label>
-        <ion-datetime [(ngModel)]="selectedDueDate" display-format="DD/MM/YYYY" presentation="date"></ion-datetime>
+        <ion-datetime [(ngModel)]="selectedDueDate" display-format="DD/MM/YYYY" presentation="date" [min]="today"></ion-datetime>
       </ion-item>
 
       <ion-item class="buton">

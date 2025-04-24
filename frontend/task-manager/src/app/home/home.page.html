@@ -53,7 +53,7 @@
         <ion-item class="date-item">
           <ion-label  class="fecha-label">Fecha límite de entrega</ion-label>
           <!--En presentation escogi que solo ese muestre la fecha pero tiene más opciones-->
-          <ion-datetime [(ngModel)]="selectedDueDate" display-format="DD/MM/YYYY" presentation="date" ></ion-datetime>
+          <ion-datetime [(ngModel)]="selectedDueDate" display-format="DD/MM/YYYY" presentation="date"  [min]="today"></ion-datetime>
         </ion-item>
         <ion-button (click)="addTask()" class="add-btn">Añadir Tarea</ion-button>
     </div>
@@ -65,7 +65,7 @@
           <ion-item>
             <div class="badge-label-container">
               <ion-label>Tareas Pendientes</ion-label>
-              <ion-badge color="warning">{{ filteredTodoTasks.length }}</ion-badge>
+              <ion-badge style="font-size: 18px;"  color="warning">{{ filteredTodoTasks.length }}</ion-badge>
             </div>
           </ion-item>
           <div *ngFor="let task of filteredTodoTasks">
@@ -106,7 +106,7 @@
           <ion-item>
             <div class="badge-label-container">
               <ion-label>Tareas Completadas</ion-label>
-              <ion-badge color="success">{{ filteredCompletedTasks.length }}</ion-badge>
+              <ion-badge style="font-size: 18px;"  color="success">{{ filteredCompletedTasks.length }}</ion-badge>
             </div>
           </ion-item>
           <div *ngFor="let task of filteredCompletedTasks">
