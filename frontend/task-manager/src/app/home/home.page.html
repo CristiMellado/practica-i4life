@@ -55,17 +55,23 @@
           <!--En presentation escogi que solo ese muestre la fecha pero tiene más opciones-->
           <ion-datetime [(ngModel)]="selectedDueDate" display-format="DD/MM/YYYY" presentation="date"  [min]="today"></ion-datetime>
         </ion-item>
-        <ion-button (click)="addTask()" class="add-btn">Añadir Tarea</ion-button>
+      </div>
     </div>
-  </div>
+    
+    <div class="boton-container">
+      <ion-button (click)="addTask()" class="add-btn">Añadir Tarea</ion-button>
+      
+    </div>
+
+
   <!-- DIV DE LA PARTE TAREAS PENDIENTES -->
-  <div style="display: flex; justify-content: center;">
+  <div style="display: flex; justify-content: center; background-color: #BBDFE8;padding-top: 10px;">
     <!-- Usamos ngFor para crear un ion-col para cada tarea, asegurando que haya 4 columnas por fila -->
     <div style="width: 37%;">
-          <ion-item>
+          <ion-item style="--background: #BBDFE8;">
             <div class="badge-label-container">
               <ion-label>Tareas Pendientes</ion-label>
-              <ion-badge style="font-size: 18px;"  color="warning">{{ filteredTodoTasks.length }}</ion-badge>
+              <ion-badge style="font-size: 20px;"  color="warning">{{ filteredTodoTasks.length }}</ion-badge>
             </div>
           </ion-item>
           <div *ngFor="let task of filteredTodoTasks">
@@ -103,7 +109,7 @@
            </div> <!--Acaba el for de las tareas pendientes-->
          </div>
          <div style="width: 37%;">
-          <ion-item>
+          <ion-item style="--background: #BBDFE8;">
             <div class="badge-label-container">
               <ion-label>Tareas Completadas</ion-label>
               <ion-badge style="font-size: 18px;"  color="success">{{ filteredCompletedTasks.length }}</ion-badge>

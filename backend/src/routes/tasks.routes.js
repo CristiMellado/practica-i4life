@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Task = require("../models/Task");
-const authMiddleware = require("../middleware/auth.middleware");
+const Task = require("../models/Task"); //importamos el modelo de task
+const authMiddleware = require("../middleware/auth.middleware"); //importamos el authMiddleware
 //añadir aqui el user 
 const User = require("../models/user.model"); //aqui me daba el falló por no poner bien el nombre muy importante
 
@@ -30,8 +30,9 @@ router.get("/tasks", async (req, res) => {
 //Obtener authMiddleware
 router.get('/', authMiddleware,async (req, res) => { 
   const user = await User.findById(req.userId)
-
-  const tasks = await Task.find(user.role === "admin" ? {} : { userId: req.userId });
+  
+  //añadir tambien el populate
+  const tasks = await Task.find(user.role === "admin" ? {} : { userId: req.userId }).populate('userId', 'username');
     res.json(tasks);
 });
 
@@ -72,7 +73,7 @@ router.post('/', authMiddleware, async (req, res) => {
       title,
       completed: false, 
       //userId: req.userId, //objeto Id para usar el username
-      userId: assignedUserId,
+      userId: assignedUserId, //le pasamos nuestra variable de usuario asignado
       department, // Incluimos el departamento si fue enviado
       status: status || 'Todo',
       dueDate: dueDate || null, //añadimos la fecha

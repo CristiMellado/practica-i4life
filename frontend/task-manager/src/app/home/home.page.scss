@@ -108,7 +108,6 @@ ion-card {
   gap: 20px;
   margin-top: 20px;
   margin-left: 25px;
-  padding-bottom: 20px; /* Espacio debajo */
   align-items: stretch;
 }
 
@@ -158,3 +157,12 @@ ion-avatar {
 
 
 
+.boton-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-left: 25px;
+  padding-bottom: 20px; /* Espacio debajo */
+  align-items: stretch;
+}

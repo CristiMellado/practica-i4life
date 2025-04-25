@@ -1,7 +1,7 @@
 //Importa Mongoose - permite definir modelos y esquemas para mi BD
 const mongoose = require('mongoose');
 
-//Creo un esquema 
+//Creo un esquema con los atributos que tiene mi tarea
 const taskSchema = new mongoose.Schema({
 title: { type: String, required: true },
 //completed: { type: Boolean, default: false },
