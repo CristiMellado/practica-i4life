@@ -1,10 +1,27 @@
-//estilos a toolbar
+h2{
+  text-align: center;
+}
+
+.toolbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.username-container {
+  margin-left: auto;
+  margin-right: 10px;
+  margin-top: 10px;
+  font-style: italic;
+  font-size: 15px;
+  color: #333;
+}
 
 ion-toolbar{
   --background:#ebebec;
   color: black;
   text-align: center;
-  text-transform: uppercase;
   padding: 20px;
 }
 
@@ -13,36 +30,34 @@ ion-title{
   margin-top: 15px;
 }
 
-#container {
-  text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 //fondo 
-ion-content{
+/*ion-content{
   --background: #6bc0bb;
-}
+}*/
 
 //estilos al botón
-ion-button.add-btn {
-  --background: #947078;
-  color:white;
+/* Estilo para el botón */
+.add-btn {
+  margin: 5px auto 0 auto;
+  --background: #84baa1;
+  color: black;
   font-weight: bold;
-  font-size:16px;
-  padding: 15px;
-  width: 10%;
-  --border-radius: 15px;
+  font-size: 15px;
+  padding: 25px;
+  width: 250px;
+  --border-radius: 25px;
+  --padding-start: 10px; /* Ajusta los padding de los bordes si es necesario */
+  --padding-end: 10px;   /* Ajusta el padding de los bordes */
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+}
 
-  &:hover{
-    --background:#7A5E51;
-    color: black;
-    transform: scale(1.05);
-    transition: all 0.3s ease;
-  }
+
+.add-btn:hover {
+  --background:#558325;
+  color: black;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
 }
 
 ion-content {
@@ -68,11 +83,86 @@ ion-content {
   margin: 0;
 }
 
-#container a {
-  text-decoration: none;
+.card-iot           { --background: #e0f7fa; }
+.card-fullstack     { --background: #e8f5e9; }
+.card-marketing     { --background: #fff3e0; }
+.card-diseno-web    { --background: #f3e5f5; }
+
+ion-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.completed {
-  text-decoration: line-through;
-  color: gray;
-  }
+ion-card {
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  margin: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 20px;
+  margin-left: 25px;
+  align-items: stretch;
+}
+
+
+.left-column {
+  flex: 1; /* Hace que ocupe el mismo espacio disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 15px; 
+}
+
+.right-column {
+  flex: 1; /* Hace que ocupe el mismo espacio disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 15px; /* Separación entre los elementos */
+}
+
+ion-avatar {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+
+.delete{
+  margin: 0;
+  padding: 0;
+  --padding-end: 8px;
+  height: 20px;
+}
+
+.badge-label-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: large;
+
+}
+
+.custom-searchbar {
+  margin-top: 10px;
+  width: 180px;  /* Ajusta el tamaño del searchbar */
+  --border-radius: 25px;
+}
+
+
+
+.boton-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-left: 25px;
+  padding-bottom: 20px; /* Espacio debajo */
+  align-items: stretch;
+}

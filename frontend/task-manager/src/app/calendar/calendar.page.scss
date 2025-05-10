@@ -1,0 +1,22 @@
+ion-toolbar{
+    --background:#ebebec;
+    color: black;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  ion-title{
+    font-size: 25px;
+    margin-top: 15px;
+  }
+
+
+full-calendar {
+    display: block;
+    max-width: 90%;
+    height: 400px;
+    margin: 0 auto; // Centrarlo
+    font-size: 0.85rem; // Opcional: hace que los textos se vean más pequeños
+    padding-top: 40px;
+  }
+  

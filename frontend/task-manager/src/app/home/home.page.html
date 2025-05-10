@@ -1,57 +1,154 @@
-<!---<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content> <!-->
-
 <ion-header>
   <ion-toolbar>
-    <ion-title>Gestor de Tareas</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding">
-  <ion-item>
-    <ion-input [(ngModel)]="newTaskTitle" placeholder="Nueva tarea"></ion-input>
-    <ion-button (click)="addTask()" class="add-btn">Añadir</ion-button>
-  </ion-item>
-  <ion-list>
-    <ion-item *ngFor="let task of tasks">
-      <ion-label [class.completed]="task.completed">
-        {{ task.title }}
-      </ion-label>
-      <ion-checkbox
-        slot="end"
-        [(ngModel)]="task.completed"
-        (ionChange)="toggleTask(task)"
-      ></ion-checkbox>
-      <ion-button color="danger" fill="clear" (click)="deleteTask(task)">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
-    </ion-item>
-  </ion-list>
-</ion-content>
-
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Tareas</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="logout()">Cerrar sesión</ion-button>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
+
+    <div class="toolbar-content">
+      <ion-title class="tarea">Gestor de Tareas</ion-title>
+      <div class="username-container">
+        <ion-icon name="person"></ion-icon>
+        <ion-text>¡Hola, {{ username }}!</ion-text>
+      </div>
+       <ion-searchbar [(ngModel)]="searchTerm" (ngModelChange)="filterTasks()" placeholder="Buscar" class="custom-searchbar" color="secondary"></ion-searchbar>
+    </div>
   </ion-toolbar>
 </ion-header>
+<ion-content class="ion-padding">
+  <div class="form-container">
+    <div class="left-column">
+      <ion-item class="task-item">
+        <ion-label position="floating">Nueva Tarea</ion-label>
+        <ion-input [(ngModel)]="newTaskTitle" ></ion-input>
+      </ion-item>
+        <ion-item class="department-item">
+          <ion-label>Departamento</ion-label>
+          <ion-select [(ngModel)]="selectedDepartment" interface="popover" placeholder="Selecciona un departamento" >
+            <ion-select-option value="Datos & IOT">Datos & IOT</ion-select-option>
+            <ion-select-option value="Desarrollo Fullstack">Desarrollo Fullstack</ion-select-option>
+            <ion-select-option value="Marketing">Marketing</ion-select-option>
+            <ion-select-option value="Diseño Web">Diseño Web</ion-select-option>
+          </ion-select>
+        </ion-item>
+        
+        <ion-item class="user-item">
+          <ion-label>Asignar tarea</ion-label>
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-select [(ngModel)]="selectedUser" interface="popover" placeholder="Asignar responsable"  >
+                <ion-select-option *ngFor="let user of users" [value]="user">
+        {{ user.username }}
+         </ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item class="description-item">
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-textarea style="height: 121px;" [(ngModel)]="newTaskDescription" placeholder="Ingresa una descripción para la tarea"></ion-textarea>
+        </ion-item> 
+      </div> <!--Acaba div de lado izquierdo-->
+
+      <div class="right-column">
+        <ion-item class="date-item">
+          <ion-label  class="fecha-label">Fecha límite de entrega</ion-label>
+          <!--En presentation escogi que solo ese muestre la fecha pero tiene más opciones-->
+          <ion-datetime [(ngModel)]="selectedDueDate" display-format="DD/MM/YYYY" presentation="date"  [min]="today"></ion-datetime>
+        </ion-item>
+      </div>
+    </div>
+    
+    <div class="boton-container">
+      <ion-button (click)="addTask()" class="add-btn">Añadir Tarea</ion-button>
+      
+    </div>
+
+
+  <!-- DIV DE LA PARTE TAREAS PENDIENTES -->
+  <div style="display: flex; justify-content: center; background-color: #BBDFE8;padding-top: 10px;">
+    <!-- Usamos ngFor para crear un ion-col para cada tarea, asegurando que haya 4 columnas por fila -->
+    <div style="width: 37%;">
+          <ion-item style="--background: #BBDFE8;">
+            <div class="badge-label-container">
+              <ion-label>Tareas Pendientes</ion-label>
+              <ion-badge style="font-size: 20px;"  color="warning">{{ filteredTodoTasks.length }}</ion-badge>
+            </div>
+          </ion-item>
+          <div *ngFor="let task of filteredTodoTasks">
+            <ion-card
+            [ngClass]="{
+              'card-iot'       : task.department === 'Datos & IOT',
+              'card-fullstack' : task.department === 'Desarrollo Fullstack',
+              'card-marketing' : task.department === 'Marketing',
+              'card-diseno-web': task.department === 'Diseño Web'
+            }"
+            > <!--Etiqueta del card-->
+              <ion-card-header>
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                  <ion-card-title>{{ task.title }}</ion-card-title>
+                  <ion-button color="danger" fill="clear" (click)="deleteTask(task)" class="delete-button">
+                    <ion-icon name="trash-bin"></ion-icon>
+                  </ion-button>
+                </div>
+              </ion-card-header>
+              <ion-card-content>
+                <p><strong>Responsable: </strong> {{ task.userId?.username }}</p>
+                <p><strong>Departamento: </strong>{{ task.department }}</p>
+                <p><strong>Creada el: </strong> {{ task.createdAt| date:'shortDate' }}</p>
+                <p><strong>Fecha límite: </strong>{{task.dueDate | date: 'shortDate'}}</p>
+                <p><strong>Descripción: </strong>{{task.description}}</p>
+                <p><strong>Estado: </strong>{{ task.status }}</p>
+    
+                <ion-toggle
+                  slot="start"
+                  [(ngModel)]="task.completed"
+                  (ionChange)="onStatusChange(task, $event.detail.checked)">Completar
+                </ion-toggle>
+              </ion-card-content>
+            </ion-card>
+           </div> <!--Acaba el for de las tareas pendientes-->
+         </div>
+         <div style="width: 37%;">
+          <ion-item style="--background: #BBDFE8;">
+            <div class="badge-label-container">
+              <ion-label>Tareas Completadas</ion-label>
+              <ion-badge style="font-size: 18px;"  color="success">{{ filteredCompletedTasks.length }}</ion-badge>
+            </div>
+          </ion-item>
+          <div *ngFor="let task of filteredCompletedTasks">
+            <ion-card
+            [ngClass]="{
+              'card-iot'       : task.department === 'Datos & IOT',
+              'card-fullstack' : task.department === 'Desarrollo Fullstack',
+              'card-marketing' : task.department === 'Marketing',
+              'card-diseno-web': task.department === 'Diseño Web'
+            }"
+          >
+              <ion-card-header>
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                  <ion-card-title>{{ task.title }}</ion-card-title>
+                  <ion-button color="danger" fill="clear" (click)="deleteTask(task)" class="delete-button">
+                    <ion-icon name="trash-bin"></ion-icon>
+                  </ion-button>
+                </div>
+              </ion-card-header>
+              <ion-card-content>
+                <p><strong>Responsable: </strong> {{ task.userId?.username }}</p>
+                <p><strong>Departamento: </strong>{{ task.department }}</p>
+                <p><strong>Creada el: </strong> {{ task.createdAt| date:'shortDate' }}</p>
+                <p><strong>Fecha límite: </strong>{{task.dueDate | date: 'shortDate'}}</p>
+                <p><strong>Descripción: </strong>{{task.description}}</p>
+                <p><strong>Estado: </strong>{{ task.status }}</p>
+    
+                <ion-toggle
+                  slot="start"
+                  [(ngModel)]="task.completed"
+                  (ionChange)="onStatusChange(task, $event.detail.checked)"
+                >Completar</ion-toggle>
+              </ion-card-content>
+            </ion-card>
+           </div>
+         </div>
+    </div>
+  </ion-content>
+  

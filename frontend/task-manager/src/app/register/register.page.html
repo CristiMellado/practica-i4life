@@ -1,17 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Iniciar Sesión</ion-title>
+    <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-
   <div class="login-container">
-    <img src="assets/icon/iniciar_sesion.png" alt="Iniciar Sesión" class="login-image">
+    <img src="assets/icon/registrar.png" alt="Registrar" class="login-image" />
 
     <ion-card class="login-card">
       <ion-card-content>
-        <form #form="ngForm" (ngSubmit)="login()" class="login-form">
+        <form #registerForm="ngForm" (ngSubmit)="register()" class="login-form">
 
           <ion-item>
             <ion-label position="floating">Usuario</ion-label>
@@ -21,7 +20,7 @@
               [(ngModel)]="username"
             ></ion-input>
           </ion-item>
-          <ion-text color="danger" *ngIf="form.submitted && !username">
+          <ion-text color="danger" *ngIf="registerForm.submitted && !username">
             El usuario es requerido
           </ion-text>
 
@@ -34,23 +33,21 @@
               [(ngModel)]="password"
             ></ion-input>
           </ion-item>
-          <ion-text color="danger" *ngIf="form.submitted && !password">
+          <ion-text color="danger" *ngIf="registerForm.submitted && !password">
             La contraseña es requerida
           </ion-text>
 
           <div class="button-container">
-            <ion-button expand="block" type="submit" class="centered-button">
-              Ingresar
-            </ion-button>
-
-            <ion-button expand="block"  (click)="goToRegister()" class="centered-button">
+            <ion-button expand="block" type="submit" class="centered-button" shape="round">
               Registrar
             </ion-button>
-        </div>
+            <ion-button routerLink="/login" expand="block" class="centered-button" shape="round">
+              Volver
+            </ion-button>
+          </div>
 
         </form>
       </ion-card-content>
     </ion-card>
   </div>
-  
 </ion-content>

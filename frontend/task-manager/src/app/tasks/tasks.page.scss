@@ -1,28 +1,169 @@
-ion-toolbar{
-    --background:#ebebec;
-    color: black;
-    text-align: center;
-    text-transform: uppercase;
-    padding: 20px;
-  }
-  
-  ion-content{
-    --background: #6bc0bb;
-  }
+/* Estilos para ion-toolbar */
+ion-toolbar {
+  --background: #ebebec;
+  color: black;
+  text-align: center;
+  padding: 20px;
+}
 
-  ion-button.add-btn {
-    --background: #947078;
-    color:white;
-    font-weight: bold;
-    font-size:16px;
-    padding: 15px;
-    width: 10%;
-    --border-radius: 15px;
-  
-    &:hover{
-      --background:#7A5E51;
-      color: black;
-      transform: scale(1.05);
-      transition: all 0.3s ease;
-    }
-  }
+.toolbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Personalización del ion-datetime */
+ion-datetime {
+  --width: 80%;  /* Para asegurarnos de que el datetime no se estire demasiado */
+  max-width: 100px; /* Limita el tamaño del selector de fecha */
+}
+
+/* Estilo para el contenedor del formulario en 2 columnas */
+.form-container {
+  display: flex;
+  justify-content: space-between; /* Espacio entre las columnas */
+  gap: 20px; /* Espaciado entre las columnas */
+  flex-wrap: wrap; /* Asegura que el contenido se ajuste bien en pantallas pequeñas */
+  margin-left: 25px;
+}
+
+
+.left-column {
+  flex: 1; /* Hace que ocupe el mismo espacio disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 15px; 
+}
+
+.right-column {
+  background-color:#7cc1d285;
+  flex: 1; /* Hace que ocupe el mismo espacio disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 15px; /* Separación entre los elementos */
+  padding-left: 15px;
+
+}
+
+/* Ajustes para ion-item (General) */
+ion-item {
+  --min-height: 50px; /* Altura mínima para cada item */
+  margin-bottom: 1px; /* Espacio entre los elementos del formulario */
+}
+
+/* Ajustes para ion-datetime */
+ion-datetime {
+  width: 40%; /* Asegura que el datetime no ocupe más de su espacio disponible */
+  max-width: 400px; /* Limita el tamaño máximo del selector de fecha */
+}
+
+/* Estilo para el botón */
+.add-btn {
+  margin: 5px auto 0 auto;
+  --background: #84baa1;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 25px;
+  width: 300px;
+  --border-radius: 25px;
+  --padding-start: 10px; /* Ajusta los padding de los bordes si es necesario */
+  --padding-end: 10px;   /* Ajusta el padding de los bordes */
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+}
+
+.add-btn:hover {
+  --background:#558325;
+  color: black;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* Ajustes en el ion-select y el ion-label */
+ion-label {
+  font-size: 14px;
+  color: #333;
+}
+
+ion-select {
+  width: 100%; /* Asegura que el select ocupe el 100% disponible */
+}
+
+ion-card {
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  margin: 10px;
+  border: 1px solid #e0e0e0;
+  height: 200px;
+  width: 300px;
+}
+
+ion-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+ion-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+ion-card-subtitle {
+  font-size: 14px;
+  color: #666;
+}
+
+ion-card-content p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+ion-item {
+  --background: transparent;
+  --inner-padding-end: 0;
+}
+
+.card-iot           { --background: #e0f7fa; }
+.card-fullstack     { --background: #e8f5e9; }
+.card-marketing     { --background: #fff3e0; }
+.card-diseno-web    { --background: #f3e5f5; }
+
+.left-column,
+.right-column {
+  flex: 1;
+  min-width: 300px;
+  max-width: 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.tasks-columns {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.task-column {
+  flex: 1;
+  min-width: 300px;
+  max-width: 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-header {
+  display: flex;
+  align-items: center; /* Alinea verticalmente */
+  justify-content: space-between; /* Asegura que haya espacio entre el label y el badge */
+  gap:5px;
+}

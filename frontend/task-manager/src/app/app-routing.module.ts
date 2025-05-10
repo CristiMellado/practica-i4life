@@ -17,8 +17,21 @@ const routes: Routes = [
   },
   {
     path: 'tasks',
-    loadChildren: () => import('./tasks/tasks.module').then( m => m.TasksPageModule)
+    loadChildren: () =>
+      import('./tasks/tasks.module').then( m => m.TasksPageModule),
+   
   },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'calendar',  // Ruta hacia la página calendar
+    loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarPageModule)
+  },
+
+
+
 ];
 @NgModule({
   imports: [
@@ -27,6 +40,14 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+
+
+
+
+
+
+
+
 
 /*const routes: Routes = [
   {

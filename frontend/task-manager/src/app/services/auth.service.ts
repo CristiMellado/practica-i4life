@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
@@ -18,16 +19,22 @@ export class AuthService {
   }
   login(username: string, password: string) {
     return this.http
-      .post<{ token: string }>(`${this.apiUrl}/login`, { username, password })
+      .post<{ token: string, role: string, username:string}>(`${this.apiUrl}/login`, { username, password })
       .pipe(
         tap((response) => {
           localStorage.setItem('token', response.token);
           this.authState.next(true);
+          localStorage.setItem('role', response.role)
+          console.log('role');
+          localStorage.setItem('username', response.username); 
+          this.authState.next(true);
+          console.log('Username guardado en localStorage:', response.username); // Esto te ayudará a saber si lo guarda
         })
       );
   }
   logout() {
-    localStorage.removeItem('token');
+    localStorage.clear();
+
     this.authState.next(false);
     this.router.navigate(['/login']);
   }
@@ -37,47 +44,9 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+
 }
 
-/*import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthService {
-  private apiUrl = environment.apiUrl;
-  private authState = new BehaviorSubject<boolean>(false);
-  constructor(private http: HttpClient) {}
-  register(username: string, password: string) {
-    return this.http.post(`${this.apiUrl}/auth/register`, {
-      username,
-      password,
-    });
-  }
-  login(username: string, password: string) {
-    return this.http
-      .post<{ token: string }>(`${this.apiUrl}/auth/login`, {
-        username,
-        password,
-      })
-      .pipe(
-        tap((response) => {
-          localStorage.setItem('token', response.token);
-          this.authState.next(true);
-        })
-      );
-  }
-  logout() {
-    localStorage.removeItem('token');
-    this.authState.next(false);
-  }
-  isAuthenticated() {
-    return this.authState.asObservable();
-  }
-  getToken() {
-    return localStorage.getItem('token');
-  }
-}*/
+
+
+
